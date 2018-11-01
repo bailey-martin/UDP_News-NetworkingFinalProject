@@ -1,5 +1,9 @@
+import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 
 public class UDP_Server implements Runnable{
     private final int clientPortNumber;
@@ -13,7 +17,7 @@ public class UDP_Server implements Runnable{
             for (int i = 0; i < 3; i++){
                 String message = "Message number " + 1;
                 DatagramPacket datagramPacket = new DatagramPacket(
-                                                                   message.getBytes(), message.length(), InetAddress.getLocalHost(), clientPort);
+                                                                   message.getBytes(), message.length(), InetAddress.getLocalHost(), clientPortNumber);
                 serverSocket.send(datagramPacket);
             }//end of for-loop
         }//end of try
