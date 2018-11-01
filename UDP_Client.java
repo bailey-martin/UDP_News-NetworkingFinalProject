@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
@@ -11,10 +13,10 @@ public class UDP_Client implements Runnable{
     public void run(){
         try(DatagramSocket clientSocket = new DatagramSocket(clientPort)){
             byte[] buffer = new byte [65507];
-            clientSocket.setSoTimeOut(3000);
+            clientSocket.setSoTimeout(3000);
             while (true){
-                DatagramPacket datagramPacket = new DatagramPacket (buffer, 0, buffer.length));
-                clientSocket.recieve(datagramPacket);
+                DatagramPacket datagramPacket = new DatagramPacket (buffer, 0, buffer.length);
+                clientSocket.receive(datagramPacket);
                 
                 String recievedMessage = new String(datagramPacket.getData());
                 System.out.println(recievedMessage);
