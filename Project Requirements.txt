@@ -1,0 +1,21 @@
+Project:
+For the course project, you will form a team with one or two other students and create a peer-to-peer UDP-based service for quickly sharing short news items with as many peers registered with the service as is "practical".
+Requirements
+As long as a peer process is running, it will listen on port 55555 for incoming news items. When a message comes in, the peer will print the message to the display (could be either GUI or console-based), then pass the item on to other peers.
+Besides creating code for the peer process, you will need to provide a way for a user to type in a message and have it sent to a peer. This could be done by a separate program that sends the news item to a peer running on the same host (localhost) and listening on port 55555.
+Peers should use the UDP checksum to check to see whether the item has suffered an error in transmission.
+Delivery of a particular news item to all active peers is done on a "best effort" basis.
+Things you'll need to figure out
+How will a peer register with the service?
+Although guaranteed delivery of a news item to all peers is not necessary, you need to devise a protocol that can get a news item to the most peers efficiently.
+What should a peer do when it receives a news item that has been damaged in transmission? It shouldn't print the item nor pass it on to other peers without some indication of the error. Should it ask the sender to retransmit?
+How will a peer determine that a news item is a duplicate of one it has already displayed and passed on?
+What to hand in and when
+
+Due October 30
+(10 pts) A list of the members of your team. There will be a 10% penalty per day late for this list.
+Due November 13
+(45 pts) A document describing the overall architecture of the service and the protocol used by the peers to share the news items. All of the things listed above for you to figure out should be addressed in this document. There will be a 1% penalty per day late for this document.
+Due December 6
+(45 pts) Source code for the peers, as well as any extra programs your system may need, such as a program to allow a user to enter a news item, or a program that assists with registering a peer with the service. The programs can be written in Java, C#, C++, C, or Python; a different programming language could be used for different components of the system.
+Source code will not be accepted after the due date.
