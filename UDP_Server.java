@@ -13,7 +13,7 @@ public class UDP_Server implements Runnable{
     }
     
     public void run(){
-        try (DatagramSocket serverSocket = new DatagramSocket(55555)){
+        try (DatagramSocket serverSocket = new DatagramSocket(55554)){
             for (int i = 0; i < 3; i++){
                 String message = "Message number " + 1;
                 DatagramPacket datagramPacket = new DatagramPacket(
