@@ -1,0 +1,10 @@
+from socket import*
+sp = 12000
+s = socket (AF_INET, SOCK_DGRAM)
+message = “Hi from your grandson :-}”
+sn = ‘weberkcudafac’
+s.sendto(message.encode(), (sn, sp))
+mod, sa = s.recvfrom(2048)
+print (mod.decode())
+s.close()
+s.sendto(message.encode(), (sn, sp)
