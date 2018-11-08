@@ -19,7 +19,7 @@ s.sendto(“Hello!”.encode(), (‘weberkcudafac’, 12000))
 
 
 from socket import*
-Sn = “weberkcudafac”
+sn = “weberkcudafac”
 sp = 12000
 s = socket(AF_INET, SOCK_STREAM)
 s.connect((sn, sp))
