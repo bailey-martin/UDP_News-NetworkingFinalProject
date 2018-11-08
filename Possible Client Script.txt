@@ -14,3 +14,17 @@ s.sendto(message.encode(), (sn, sp)
 from socket import*
 s = socket(AF_INET, SOCK_DGRAM)
 s.sendto(“Hello!”.encode(), (‘weberkcudafac’, 12000))
+
+
+
+
+from socket import*
+Sn = “weberkcudafac”
+sp = 12000
+s = socket(AF_INET, SOCK_STREAM)
+s.connect((sn, sp))
+sentence = “Wait your turn, please”
+s.send(sentence.encode())
+mod = s.recv(1024)
+print(mod.decode())
+s.close()
