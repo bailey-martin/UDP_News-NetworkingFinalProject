@@ -8,3 +8,9 @@ mod, sa = s.recvfrom(2048)
 print (mod.decode())
 s.close()
 s.sendto(message.encode(), (sn, sp)
+
+
+
+from socket import*
+s = socket(AF_INET, SOCK_DGRAM)
+s.sendto(“Hello!”.encode(), (‘weberkcudafac’, 12000))
