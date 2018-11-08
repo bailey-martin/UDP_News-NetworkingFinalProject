@@ -28,3 +28,14 @@ s.send(sentence.encode())
 mod = s.recv(1024)
 print(mod.decode())
 s.close()
+
+
+import socket
+UDP_IP = “weberkcudafac”
+UDP_PORT = 12000
+MESSAGE = “SUP”
+print “UDP target IP: “, UDP_IP
+print “UDP target port: “, UDP_PORT
+print “message: “, MESSAGE
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
