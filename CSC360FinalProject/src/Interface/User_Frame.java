@@ -4,12 +4,6 @@
  * and open the template in the editor.
  */
 package Interface;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,18 +18,7 @@ public class User_Frame extends javax.swing.JFrame {
         initComponents();
     }
     
-    public String getClientIP(){
-        String ip = "";
-        try(final DatagramSocket socket = new DatagramSocket()){
-            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
-            ip = socket.getLocalAddress().getHostAddress();
-        } catch (SocketException ex) {
-            System.out.println ("ERROR IN IP PULL HAS OCCURED.");
-        } catch (UnknownHostException ex) {
-            System.out.println ("ERROR IN IP PULL HAS OCCURED.");
-        }
-        return ip;
-    }//end of getClientIP()
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,8 +102,7 @@ public class User_Frame extends javax.swing.JFrame {
 
     private void postNewsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postNewsButtonActionPerformed
         // TODO add your handling code here:
-        getClientIP(); //gets the IP address of the client
-        System.out.println (getClientIP()); //debugging purposes
+        
     }//GEN-LAST:event_postNewsButtonActionPerformed
 
     /**

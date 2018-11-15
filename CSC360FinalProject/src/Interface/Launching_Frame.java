@@ -5,6 +5,11 @@
  */
 package Interface;
 
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
 /**
  *
  * @author McMatt19
@@ -17,6 +22,19 @@ public class Launching_Frame extends javax.swing.JFrame {
     public Launching_Frame() {
         initComponents();
     }
+    
+    public String getClientIP(){
+        String ip = "";
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            ip = socket.getLocalAddress().getHostAddress();
+        } catch (SocketException ex) {
+            System.out.println ("ERROR IN IP PULL HAS OCCURED.");
+        } catch (UnknownHostException ex) {
+            System.out.println ("ERROR IN IP PULL HAS OCCURED.");
+        }
+        return ip;
+    }//end of getClientIP()
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +91,8 @@ public class Launching_Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LaunchingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaunchingButtonActionPerformed
-        
+        getClientIP(); //gets the IP address of the client
+        System.out.println (getClientIP()); //debugging purposes
     }//GEN-LAST:event_LaunchingButtonActionPerformed
 
     /**
