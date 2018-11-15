@@ -9,6 +9,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -93,6 +94,11 @@ public class Launching_Frame extends javax.swing.JFrame {
     private void LaunchingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaunchingButtonActionPerformed
         getClientIP(); //gets the IP address of the client
         System.out.println (getClientIP()); //debugging purposes
+        //Close this window
+        setVisible(false);
+        //Open USER-FRAME window
+        User_Frame user_window = new User_Frame();
+        user_window.setVisible(true);
     }//GEN-LAST:event_LaunchingButtonActionPerformed
 
     /**
