@@ -37,7 +37,7 @@
                       <Component id="jScrollPane1" min="-2" pref="321" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                       <Component id="postNewsButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -114,6 +114,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Post my News!"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postNewsButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
