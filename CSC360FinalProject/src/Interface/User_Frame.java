@@ -32,9 +32,9 @@ public class User_Frame extends javax.swing.JFrame {
         messageFieldLabel = new javax.swing.JLabel();
         chatFeedLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        newNewsMessageField = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        newsFeedField = new javax.swing.JTextArea();
         postNewsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,13 +43,13 @@ public class User_Frame extends javax.swing.JFrame {
 
         chatFeedLabel.setText("P2P News Chat Feed");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        newNewsMessageField.setColumns(20);
+        newNewsMessageField.setRows(5);
+        jScrollPane1.setViewportView(newNewsMessageField);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        newsFeedField.setColumns(20);
+        newsFeedField.setRows(5);
+        jScrollPane2.setViewportView(newsFeedField);
 
         postNewsButton.setText("Post my News!");
         postNewsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +102,11 @@ public class User_Frame extends javax.swing.JFrame {
 
     private void postNewsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postNewsButtonActionPerformed
         // TODO add your handling code here:
+        String newNewsMessage = newNewsMessageField.getText();
+        newsFeedField.append(newNewsMessage + "\n");
+        newNewsMessageField.setText("");
         
+        //Somehow pass the new message to all peers in network
     }//GEN-LAST:event_postNewsButtonActionPerformed
 
     /**
@@ -144,9 +148,9 @@ public class User_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel chatFeedLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel messageFieldLabel;
+    private javax.swing.JTextArea newNewsMessageField;
+    private javax.swing.JTextArea newsFeedField;
     private javax.swing.JButton postNewsButton;
     // End of variables declaration//GEN-END:variables
 }
