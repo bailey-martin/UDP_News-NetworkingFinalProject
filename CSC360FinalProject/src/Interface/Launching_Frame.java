@@ -36,6 +36,7 @@ public class Launching_Frame extends javax.swing.JFrame {
         }
         return ip;
     }//end of getClientIP()
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,7 +100,9 @@ public class Launching_Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LaunchingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaunchingButtonActionPerformed
+        User_Frame userFrame = new User_Frame();
         getClientIP(); //gets the IP address of the client
+        userFrame.setMyIP(getClientIP());
         System.out.println (getClientIP()); //debugging purposes
         //Close this window
         setVisible(false);

@@ -19,7 +19,16 @@ public class User_Frame extends javax.swing.JFrame {
         newsFeedField.setEditable(false);
     }
     
+    public String myClientIPAddress = "";
     
+    
+    public void setMyIP(String ipaddr){
+        myClientIPAddress = ipaddr;
+    }
+    
+    public String getMyIP(){
+        return myClientIPAddress;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
