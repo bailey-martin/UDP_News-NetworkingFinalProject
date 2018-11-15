@@ -16,6 +16,7 @@ public class User_Frame extends javax.swing.JFrame {
      */
     public User_Frame() {
         initComponents();
+        newsFeedField.setEditable(false);
     }
     
     
