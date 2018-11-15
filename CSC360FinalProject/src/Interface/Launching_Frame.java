@@ -45,15 +45,11 @@ public class Launching_Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        LaunchingMessage = new javax.swing.JTextArea();
         LaunchingButton = new javax.swing.JButton();
+        LaunchingLabel = new javax.swing.JLabel();
+        LaunchingLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        LaunchingMessage.setColumns(20);
-        LaunchingMessage.setRows(5);
-        jScrollPane1.setViewportView(LaunchingMessage);
 
         LaunchingButton.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         LaunchingButton.setText("LAUNCH");
@@ -63,6 +59,12 @@ public class Launching_Frame extends javax.swing.JFrame {
             }
         });
 
+        LaunchingLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        LaunchingLabel.setText("Welcome to our Final Project!");
+
+        LaunchingLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        LaunchingLabel2.setText("To begin, just press LAUNCH and start your journey...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,21 +72,25 @@ public class Launching_Frame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(253, 253, 253)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LaunchingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LaunchingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(LaunchingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                        .addGap(154, 154, 154)
+                        .addComponent(LaunchingLabel2)))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
+                .addGap(88, 88, 88)
+                .addComponent(LaunchingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(LaunchingLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107)
                 .addComponent(LaunchingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,7 +138,7 @@ public class Launching_Frame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LaunchingButton;
-    private javax.swing.JTextArea LaunchingMessage;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel LaunchingLabel;
+    private javax.swing.JLabel LaunchingLabel2;
     // End of variables declaration//GEN-END:variables
 }
