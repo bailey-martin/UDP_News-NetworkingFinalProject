@@ -90,8 +90,7 @@ public class SocketTest {
                         */
                         
                         Random rand=new Random();
-                        int position;
-                        position = rand.nextInt(Interface.Launching_Frame.ip_addresses.size());
+                        int position = rand.nextInt(Launching_Frame.counter);
                     }
                     
                     //System.out.println("Message received ..."+ temp);
