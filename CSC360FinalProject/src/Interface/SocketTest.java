@@ -76,6 +76,10 @@ public String getClientIP(){
                     socket.send(packet);
                     Thread.sleep(50);
                     i++;
+                    //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
+                   SocketTest dummy = new SocketTest();
+                   dummy.P2PWork();
+                 
                     System.out.println("Sending Attempt Number of News Item: " + i);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -133,10 +137,10 @@ public String getClientIP(){
                     temp=new String(packet.getData());
                     System.out.println("News Item that was received by the server: "+temp);
                     
-                    //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-                   SocketTest dummy = new SocketTest();
-                   dummy.P2PWork();
-                 
+//                    //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
+//                   SocketTest dummy = new SocketTest();
+//                   dummy.P2PWork();
+//                 
 //                    
                     //System.out.println("Message received ..."+ temp);
                 } catch (IOException ex) {
