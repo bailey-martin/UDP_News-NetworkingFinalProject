@@ -49,6 +49,7 @@ public class SocketTest {
                    // parent.quit();
                 }
             }
+            break;
         }}).start();
     }//end of startSender()
 
