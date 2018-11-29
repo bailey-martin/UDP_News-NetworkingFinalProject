@@ -26,8 +26,7 @@ public class SocketTest {
         } catch (UnknownHostException ex) {
             System.out.println ("ERROR IN IP PULL HAS OCCURED.");
         }
-        
-  }
+  }//end of constructor
 public String getClientIP(){
         String ip = "";
         try(final DatagramSocket socket = new DatagramSocket()){
@@ -36,11 +35,13 @@ public String getClientIP(){
             //add ip to arrayList
             ip_addresses.add(ip);
             can_be_used.add(true);
-        } catch (SocketException ex) {
+        }//end of try()
+        catch (SocketException ex) {
             System.out.println ("ERROR IN IP PULL HAS OCCURED.");
-        } catch (UnknownHostException ex) {
+        }//end of catch()
+        catch (UnknownHostException ex) {
             System.out.println ("ERROR IN IP PULL HAS OCCURED.");
-        }
+        }//end of catch()
         return ip;
     }//end of getClientIP()
 
@@ -65,7 +66,6 @@ public String getClientIP(){
                 socket.setBroadcast(true);
             } catch (SocketException ex) {
                 ex.printStackTrace();
-                //parent.quit();
             }//end of catch
 
             DatagramPacket packet = new DatagramPacket(data,data.length,aHost,55555);
@@ -77,19 +77,20 @@ public String getClientIP(){
                     Thread.sleep(50);
                     i++;
                     //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-                   SocketTest dummy = new SocketTest();
-                   dummy.P2PWork();
+                    SocketTest dummy = new SocketTest();
+                    dummy.P2PWork();
                  
                     System.out.println("Sending Attempt Number of News Item: " + i);
-                } catch (IOException ex) {
+                }//end of try
+                catch (IOException ex) {
                     ex.printStackTrace();
-                   // parent.quit();
-                } catch (InterruptedException ex) {
+                }//end of catch
+                catch (InterruptedException ex) {
                     ex.printStackTrace();
-                   // parent.quit();
-                }
-            }
-        }}).start();
+                }//end of catch
+            }//end of while-loop
+        }//end of run()
+    }).start();
     }//end of startSender()
   
   public void P2PWork() throws UnknownHostException{
@@ -101,58 +102,48 @@ public String getClientIP(){
 //                        change boolean location to false.
 //                        */
                         Boolean conditional = true;
-                        if (ip_addresses.size()>1){
-                        while (conditional == true){
-                        Random rand=new Random();
-                        int position = rand.nextInt(ip_addresses.size());
-                        if (can_be_used.get(position).equals(true)){
-                            //code
-                            conditional = false;
-                            can_be_used.set(position, false);
-                            startP2PSender(ip_addresses.get(position));
-                        }//end of if-statement
-                        }//end of true loop
-                        }//end of if-peventing 1 user
+                            if (ip_addresses.size()>1){
+                                while (conditional == true){
+                                    Random rand=new Random();
+                                    int position = rand.nextInt(ip_addresses.size());
+                                    if (can_be_used.get(position).equals(true)){
+                                        conditional = false;
+                                        can_be_used.set(position, false);
+                                        startP2PSender(ip_addresses.get(position));
+                                    }//end of if-statement
+                                }//end of true loop
+                            }//end of if-peventing 1 user
   }//end of P2PWork Class
   
   public static void startServer() {
     (new Thread() {
         @Override
-        public void run() {
-                //byte data[] = new byte[0];
+        public void run(){
                 DatagramSocket socket = null;
                 try {
                     socket = new DatagramSocket(55555); //listens on port 55555
-                    //socket.setBroadcast(true);;
                 } catch (SocketException ex) {
                     ex.printStackTrace();
-                    //parent.quit();
                 }//end of catch
                 DatagramPacket packet = new DatagramPacket(new byte[1024], 1024); //makes a new packet
-                //System.out.println("this is what has been received111"+packet.getData());
                 String temp;
-                while (true) {
-                try {
-                    socket.receive(packet);
-                    temp=new String(packet.getData());
-                    System.out.println("News Item that was received by the server: "+temp);
-                    
-//                    //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-//                   SocketTest dummy = new SocketTest();
-//                   dummy.P2PWork();
-//                 
-//                    
-                    //System.out.println("Message received ..."+ temp);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    //parent.quit();
-                }//end of catch
-                 }//end of while
+                while (true){
+                    try {
+                        socket.receive(packet);
+                        temp=new String(packet.getData());
+                        System.out.println("News Item that was received by the server: "+temp);
+//                      //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
+//                      SocketTest dummy = new SocketTest();
+//                      dummy.P2PWork();
+                    }//end of try-statement 
+                    catch (IOException ex) {
+                        ex.printStackTrace();
+                    }//end of catch
+                }//end of while
             }//end of run
     }).start();
  }//end of start server
             
-  
   //P2P Send
   public void startP2PSender(String ip_addr) throws UnknownHostException{
     InetAddress aHost = InetAddress.getByName(ip_addr);
