@@ -10,13 +10,14 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import javax.swing.JFrame;
+import java.util.ArrayList;
 
 /**
  *
  * @author McMatt19
  */
 public class Launching_Frame extends javax.swing.JFrame {
-
+    public ArrayList ip_addresses = new ArrayList();
     /**
      * Creates new form Launching_Frame
      */
@@ -27,8 +28,10 @@ public class Launching_Frame extends javax.swing.JFrame {
     public String getClientIP(){
         String ip = "";
         try(final DatagramSocket socket = new DatagramSocket()){
-            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            socket.connect(InetAddress.getByName("8.8.8.8"), 55555);  //changed from 10002 to 55555
             ip = socket.getLocalAddress().getHostAddress();
+            //add ip to arrayList
+            ip_addresses.add(ip);
         } catch (SocketException ex) {
             System.out.println ("ERROR IN IP PULL HAS OCCURED.");
         } catch (UnknownHostException ex) {
