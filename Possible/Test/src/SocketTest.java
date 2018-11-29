@@ -8,9 +8,7 @@ import java.net.*;
 public class SocketTest {
   private boolean run = true;
 
-
   public static void main(String[] args) throws IOException {
-
     startServer();
     startSender();
   }
@@ -28,13 +26,9 @@ public class SocketTest {
             } catch (SocketException ex) {
                 ex.printStackTrace();
                 //parent.quit();
-            }
+            }//end of catch
 
-            DatagramPacket packet = new DatagramPacket(
-                    data,
-                    data.length,
-                    aHost,
-                    9090);
+            DatagramPacket packet = new DatagramPacket(data,data.length,aHost,55555);
             int i=0;
             while (i<10) {
                 try {
@@ -64,7 +58,7 @@ public class SocketTest {
                 //byte data[] = new byte[0];
                 DatagramSocket socket = null;
                 try {
-                    socket = new DatagramSocket(9090);
+                    socket = new DatagramSocket(55555);
                     //socket.setBroadcast(true);;
 
                 } catch (SocketException ex) {
