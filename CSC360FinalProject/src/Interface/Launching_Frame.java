@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class Launching_Frame extends javax.swing.JFrame {
     public ArrayList ip_addresses = new ArrayList();
+    public ArrayList can_be_used = new ArrayList(); //boolean arraylist; true if matching location IP can be sent to; false if already sent to
     /**
      * Creates new form Launching_Frame
      */
@@ -32,6 +33,7 @@ public class Launching_Frame extends javax.swing.JFrame {
             ip = socket.getLocalAddress().getHostAddress();
             //add ip to arrayList
             ip_addresses.add(ip);
+            can_be_used.add(true);
         } catch (SocketException ex) {
             System.out.println ("ERROR IN IP PULL HAS OCCURED.");
         } catch (UnknownHostException ex) {

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.*;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SocketTest {
@@ -78,7 +79,20 @@ public class SocketTest {
                     System.out.println("News Item that was received by the server: "+temp);
                     
                     //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-                    
+                    boolean condition=true;
+                    while(condition==true){
+                        /*
+                        random number between 0 and array length of ips 
+                        if there and can be used is true in boolean array, 
+                        then call method start peer 2 peer sender with parameter of ip at location of the 
+                        random number generated. 
+                        change boolean location to false.
+                        */
+                        
+                        Random rand=new Random();
+                        int position;
+                        position = rand.nextInt(Interface.Launching_Frame.ip_addresses.size());
+                    }
                     
                     //System.out.println("Message received ..."+ temp);
                 } catch (IOException ex) {
