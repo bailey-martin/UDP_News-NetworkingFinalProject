@@ -1,10 +1,6 @@
 package Interface;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,9 +8,8 @@ import java.util.Scanner;
 
 public class SocketTest {
   private boolean run = true;
-  private ArrayList ip_addresses = new ArrayList();
-  private ArrayList can_be_used = new ArrayList(); //boolean arraylist; true if matching location IP can be sent to; false if already sent to
-  private int ipArraySize = ip_addresses.size();
+  private ArrayList <String> ip_addresses = new ArrayList();
+  private ArrayList <Boolean> can_be_used = new ArrayList(); //boolean arraylist; true if matching location IP can be sent to; false if already sent to
 
 public String getClientIP(){
         String ip = "";
@@ -74,8 +69,30 @@ public String getClientIP(){
             }
         }}).start();
     }//end of startSender()
-
-
+  
+  public void P2PWork() throws UnknownHostException{
+//                        /*
+//                        random number between 0 and array length of ips 
+//                        if there and can be used is true in boolean array, 
+//                        then call method start peer 2 peer sender with parameter of ip at location of the 
+//                        random number generated. 
+//                        change boolean location to false.
+//                        */
+                        Boolean conditional = true;
+                        if (ip_addresses.size()>1){
+                        while (conditional == true){
+                        Random rand=new Random();
+                        int position = rand.nextInt(ip_addresses.size());
+                        if (can_be_used.get(position).equals(true)){
+                            //code
+                            conditional = false;
+                            can_be_used.set(position, false);
+                            startP2PSender(ip_addresses.get(position));
+                        }//end of if-statement
+                        }//end of true loop
+                        }//end of if-peventing 1 user
+  }//end of P2PWork Class
+  
   public static void startServer() {
     (new Thread() {
         @Override
@@ -99,18 +116,9 @@ public String getClientIP(){
                     System.out.println("News Item that was received by the server: "+temp);
                     
                     //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-//                    boolean condition=true;
-//                    while(condition==true){
-//                        /*
-//                        random number between 0 and array length of ips 
-//                        if there and can be used is true in boolean array, 
-//                        then call method start peer 2 peer sender with parameter of ip at location of the 
-//                        random number generated. 
-//                        change boolean location to false.
-//                        */
-//                        
-//                        Random rand=new Random();
-//                        int position = rand.nextInt();
+                   SocketTest dummy = new SocketTest();
+                   dummy.P2PWork();
+                 
 //                    
                     //System.out.println("Message received ..."+ temp);
                 } catch (IOException ex) {
@@ -122,14 +130,6 @@ public String getClientIP(){
     }).start();
  }//end of start server
             
-  
-  
-   //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-
-  
-  
-            
-  
   
   //P2P Send
   public static void startP2PSender(String ip_addr) throws UnknownHostException{
