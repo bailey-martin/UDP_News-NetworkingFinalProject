@@ -26,7 +26,6 @@ public class SocketTest {
         } catch (UnknownHostException ex) {
             System.out.println ("ERROR IN IP PULL HAS OCCURED.");
         }
-        
   }
 public String getClientIP(){
         String ip = "";
@@ -152,7 +151,6 @@ public String getClientIP(){
     }).start();
  }//end of start server
             
-  
   //P2P Send
   public void startP2PSender(String ip_addr) throws UnknownHostException{
     InetAddress aHost = InetAddress.getByName(ip_addr);
