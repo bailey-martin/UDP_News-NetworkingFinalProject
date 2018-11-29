@@ -6,11 +6,31 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class SocketTest {
   private boolean run = true;
+  private ArrayList ip_addresses = new ArrayList();
+  private ArrayList can_be_used = new ArrayList(); //boolean arraylist; true if matching location IP can be sent to; false if already sent to
+  private int ipArraySize = ip_addresses.size();
+
+public String getClientIP(){
+        String ip = "";
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 55555);  //changed from 10002 to 55555
+            ip = socket.getLocalAddress().getHostAddress();
+            //add ip to arrayList
+            ip_addresses.add(ip);
+            can_be_used.add(true);
+        } catch (SocketException ex) {
+            System.out.println ("ERROR IN IP PULL HAS OCCURED.");
+        } catch (UnknownHostException ex) {
+            System.out.println ("ERROR IN IP PULL HAS OCCURED.");
+        }
+        return ip;
+    }//end of getClientIP()
 
   public static void main(String[] args) throws IOException {
     startServer();
@@ -79,20 +99,19 @@ public class SocketTest {
                     System.out.println("News Item that was received by the server: "+temp);
                     
                     //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-                    boolean condition=true;
-                    while(condition==true){
-                        /*
-                        random number between 0 and array length of ips 
-                        if there and can be used is true in boolean array, 
-                        then call method start peer 2 peer sender with parameter of ip at location of the 
-                        random number generated. 
-                        change boolean location to false.
-                        */
-                        
-                        Random rand=new Random();
-                        int position = rand.nextInt(Launching_Frame.counter);
-                    }
-                    
+//                    boolean condition=true;
+//                    while(condition==true){
+//                        /*
+//                        random number between 0 and array length of ips 
+//                        if there and can be used is true in boolean array, 
+//                        then call method start peer 2 peer sender with parameter of ip at location of the 
+//                        random number generated. 
+//                        change boolean location to false.
+//                        */
+//                        
+//                        Random rand=new Random();
+//                        int position = rand.nextInt();
+//                    
                     //System.out.println("Message received ..."+ temp);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -102,8 +121,14 @@ public class SocketTest {
             }//end of run
     }).start();
  }//end of start server
+            
   
   
+   //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
+
+  
+  
+            
   
   
   //P2P Send
