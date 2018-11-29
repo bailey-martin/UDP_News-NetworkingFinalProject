@@ -11,6 +11,23 @@ public class SocketTest {
   private ArrayList <String> ip_addresses = new ArrayList();
   private ArrayList <Boolean> can_be_used = new ArrayList(); //boolean arraylist; true if matching location IP can be sent to; false if already sent to
 
+  public SocketTest(){
+      String ip = "";
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 55555);  //changed from 10002 to 55555
+            ip = socket.getLocalAddress().getHostAddress();
+            //add ip to arrayList
+            ip_addresses.add(ip);
+            can_be_used.add(true);
+            System.out.println ("IP's have been added to the arrayLists.");
+            System.out.println ("Your IP address is: " + ip);
+        } catch (SocketException ex) {
+            System.out.println ("ERROR IN IP PULL HAS OCCURED.");
+        } catch (UnknownHostException ex) {
+            System.out.println ("ERROR IN IP PULL HAS OCCURED.");
+        }
+        
+  }
 public String getClientIP(){
         String ip = "";
         try(final DatagramSocket socket = new DatagramSocket()){
@@ -28,6 +45,7 @@ public String getClientIP(){
     }//end of getClientIP()
 
   public static void main(String[] args) throws IOException {
+    SocketTest s1 = new SocketTest();
     startServer();
     startSender();
   }
@@ -132,7 +150,7 @@ public String getClientIP(){
             
   
   //P2P Send
-  public static void startP2PSender(String ip_addr) throws UnknownHostException{
+  public void startP2PSender(String ip_addr) throws UnknownHostException{
     InetAddress aHost = InetAddress.getByName(ip_addr);
     (new Thread() {
         @Override
