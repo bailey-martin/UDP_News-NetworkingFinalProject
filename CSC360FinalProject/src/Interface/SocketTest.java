@@ -26,7 +26,10 @@ public class SocketTest {
         } catch (UnknownHostException ex) {
             System.out.println ("ERROR IN IP PULL HAS OCCURED.");
         }
+
   }//end of constructor
+
+
 public String getClientIP(){
         String ip = "";
         try(final DatagramSocket socket = new DatagramSocket()){
