@@ -19,6 +19,7 @@ public class SocketTest {
     (new Thread() {
         @Override
         public void run() {
+            System.out.println("Please enter the news item that you wish to share:\n");
             Scanner scan = new Scanner(System.in);
             String str = scan.nextLine();
             byte data[] = str.getBytes();
