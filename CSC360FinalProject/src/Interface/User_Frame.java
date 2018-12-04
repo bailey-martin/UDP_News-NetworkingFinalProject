@@ -160,7 +160,7 @@ public class User_Frame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel messageFieldLabel;
     private javax.swing.JTextArea newNewsMessageField;
-    private javax.swing.JTextArea newsFeedField;
+    public javax.swing.JTextArea newsFeedField;
     private javax.swing.JButton postNewsButton;
     // End of variables declaration//GEN-END:variables
 }
