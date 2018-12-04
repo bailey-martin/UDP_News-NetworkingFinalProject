@@ -40,7 +40,7 @@ public class SocketTest {
 //        InetAddress aHost = InetAddress.getLocalHost();
          InetAddress aHost = InetAddress.getByName("192.168.223.203");
          //InetAddress aHost = InetAddress.getByName("10.18.40.37");
-         //InetAddress aHost = InetAddress.getByName("192.168.223.114");
+         InetAddress bHost = InetAddress.getByName("192.168.223.114");
         (new Thread() {
             @Override
             public void run() {
@@ -57,11 +57,13 @@ public class SocketTest {
                 }//end of catch
 
                 DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
+                DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
                 int i = 0;
                 while (i < 5) { //begin of while
                     try { //begin of try()
                         System.out.println("Sending news item: " + new String(packet.getData()));
                         socket.send(packet);
+                        socket.send(packet2);
                         Thread.sleep(50);
                         i++;
                         //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
@@ -111,7 +113,8 @@ public class SocketTest {
                 } catch (SocketException ex) {
                     ex.printStackTrace();
                 }//end of catch
-                DatagramPacket packet = new DatagramPacket(new byte[1024], 1024); //makes a new packet
+                DatagramPacket packet = new DatagramPacket(new byte[1024], 1024);//makes a new packet
+                DatagramPacket packet2 = new DatagramPacket(new byte[1024], 1024);
                 String temp;
                 while (true) {
                     try {
