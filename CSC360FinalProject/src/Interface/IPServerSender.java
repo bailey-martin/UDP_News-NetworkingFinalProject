@@ -11,6 +11,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 /**
  *
@@ -24,7 +25,7 @@ public class IPServerSender {
  
     public IPServerSender() throws SocketException, UnknownHostException {
         socket = new DatagramSocket();
-        address = InetAddress.getByName("localhost");
+        address = InetAddress.getByName("weberkcudafac");
     }
  
     public String sendEcho(String msg) throws IOException {
@@ -42,4 +43,13 @@ public class IPServerSender {
     public void close() {
         socket.close();
     }
+    
+    public static void main (String [] args) throws SocketException, UnknownHostException, IOException{
+        IPServerSender a = new IPServerSender();
+        Scanner myScanner = new Scanner (System.in);
+        System.out.println("Enter the IP address that you would like to send:");
+        String message = myScanner.nextLine();
+        a.sendEcho(message);
+        System.out.println("Message sent");
+    }//end of main
 }

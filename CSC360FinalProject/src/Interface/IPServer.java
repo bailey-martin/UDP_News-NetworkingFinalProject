@@ -25,6 +25,7 @@ public class IPServer extends Thread {
  
     public IPServer() throws SocketException {
         socket = new DatagramSocket(55555);
+        System.out.println ("Listening on port 5555 for data.......");
     }
  
     public void run() {
@@ -57,4 +58,7 @@ public class IPServer extends Thread {
         }
         socket.close();
     }
+    public static void main (String [] args) throws SocketException{
+        IPServer a = new IPServer();
+    }//end of main
 }
