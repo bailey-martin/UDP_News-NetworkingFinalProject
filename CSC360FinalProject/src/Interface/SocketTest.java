@@ -47,8 +47,11 @@ public class SocketTest {
                 System.out.println("Please enter the news item that you wish to share:\n");
                 Scanner scan = new Scanner(System.in);
                 String str = scan.nextLine();
-                byte data[] = str.getBytes();
-                DatagramSocket socket = null;
+                
+                int i = 0;
+                while (i < 5) { //begin of while
+                    byte data[] = str.getBytes();
+                    DatagramSocket socket = null;
                 try {
                     socket = new DatagramSocket();
                    // socket.setBroadcast(true);
@@ -58,8 +61,6 @@ public class SocketTest {
 
                 DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                 DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
-                int i = 0;
-                while (i < 5) { //begin of while
                     try { //begin of try()
                         System.out.println("Sending news item: " + new String(packet.getData()));
                         socket.send(packet);
