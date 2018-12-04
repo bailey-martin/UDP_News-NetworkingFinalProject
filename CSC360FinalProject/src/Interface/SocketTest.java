@@ -38,8 +38,8 @@ public class SocketTest {
     
     public static void startSender() throws UnknownHostException { //beginning of startSender()
 //        InetAddress aHost = InetAddress.getLocalHost();
-         //InetAddress aHost = InetAddress.getByName("192.168.223.203");
-         InetAddress aHost = InetAddress.getByName("10.18.40.37");
+         InetAddress aHost = InetAddress.getByName("192.168.223.203");
+         //InetAddress aHost = InetAddress.getByName("10.18.40.37");
          //InetAddress aHost = InetAddress.getByName("192.168.223.114");
         (new Thread() {
             @Override
