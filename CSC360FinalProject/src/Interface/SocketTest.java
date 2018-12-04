@@ -49,7 +49,7 @@ public String getClientIP(){
     }//end of getClientIP()
 
   public static void main(String[] args) throws IOException {
-    SocketTest s1 = new SocketTest();
+    SocketTest s1 = new SocketTest(); //designed to pull client IP
     startServer();
     startSender();
   }
@@ -149,7 +149,7 @@ public String getClientIP(){
             
   //P2P Send
   public void startP2PSender(String ip_addr) throws UnknownHostException{
-    InetAddress aHost = InetAddress.getByName(ip_addr);
+    InetAddress aHost = InetAddress.getByName(ip_addr); //gets the IP of a peer from arrayList and attempts to send to them
     (new Thread() {
         @Override
         public void run() {
@@ -159,7 +159,7 @@ public String getClientIP(){
             byte data[] = str.getBytes();
             DatagramSocket socket = null;
             try {
-                socket = new DatagramSocket();
+                socket = new DatagramSocket(); //creates a new socket
                 socket.setBroadcast(true);
             } catch (SocketException ex) {
                 ex.printStackTrace();
@@ -170,7 +170,7 @@ public String getClientIP(){
             int i=0;
             while (i<10) {
                 try {
-                    System.out.println("Sending news item: "+new String(packet.getData()));
+                    System.out.println("Sending news item: " + new String(packet.getData()));
                     socket.send(packet);
                     Thread.sleep(50);
                     i++;
