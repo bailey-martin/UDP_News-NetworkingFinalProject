@@ -47,7 +47,7 @@ public class SocketTest {
     } //end of getClientIP()
 
     public static void main(String[] args) throws IOException { //begin main
-        SocketTest s1 = new SocketTest();
+        SocketTest s1 = new SocketTest();//designed to pull client IP
         startServer();
         startSender();
     } //end main
@@ -144,8 +144,9 @@ public class SocketTest {
     }//end of start server
             
   //P2P Send
-  public void startP2PSender(String ip_addr) throws UnknownHostException { //beginning of startP2PSender()
-        InetAddress aHost = InetAddress.getByName(ip_addr);
+
+    public void startP2PSender(String ip_addr) throws UnknownHostException {//beginning of startP2PSender()
+        InetAddress aHost = InetAddress.getByName(ip_addr); //gets the IP of a peer from arrayList and attempts to send to them
         (new Thread() {
             @Override
             public void run() {
@@ -155,7 +156,7 @@ public class SocketTest {
                 byte data[] = str.getBytes();
                 DatagramSocket socket = null;
                 try {
-                    socket = new DatagramSocket();
+                    socket = new DatagramSocket(); //creates a new socket
                     socket.setBroadcast(true);
                 } catch (SocketException ex) {
                     ex.printStackTrace();
@@ -176,9 +177,9 @@ public class SocketTest {
                         // parent.quit();
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
-                        // parent.quit();
-                    }
-                }
+                        //parent.quit();
+                    }//end of catch
+                }//end of while
             }//end of run()
         }).start(); //end of thread
     }//end of startSender()
