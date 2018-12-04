@@ -11,40 +11,24 @@ public class SocketTest {
     private ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
     private ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
 
-    public SocketTest() { //beginning of constructor
-        String ip = ""; //initialize string to contain nothing
+    public SocketTest() throws UnknownHostException { //beginning of constructor
+        //String ip = ""; //initialize string to contain nothing
         try (final DatagramSocket socket = new DatagramSocket()) {
-            socket.connect(InetAddress.getByName("8.8.8.8"), 55555);  //changed from 10002 to 55555
-            ip = socket.getLocalAddress().getHostAddress();
+            //gets host IP address and stores as type InetAddress
+            InetAddress ip = InetAddress.getLocalHost();
+            //Converts from IPAddress to String
+            String tempIP = ip.toString();
+            //subString that takes the local host name and / out of the IP address
+            tempIP = tempIP.substring(tempIP.lastIndexOf("/") + 1);
             //add ip to arrayList, add boolean true to arrayList
-            ip_addresses.add(ip);
+            ip_addresses.add(tempIP);
             can_be_used.add(true);
             System.out.println("IP's have been added to the arrayLists.");
-            System.out.println("Your IP address is: " + ip);
+            System.out.println("Your IP address is: " + tempIP);
         } catch (SocketException ex) {
-            System.out.println("ERROR IN IP PULL HAS OCCURED.");
-        } catch (UnknownHostException ex) {
             System.out.println("ERROR IN IP PULL HAS OCCURED.");
         }
     } //end of constructor
-
-    public String getClientIP() { //begin method getClientIP()
-        String ip = ""; //initialize string to contain nothing
-        try (final DatagramSocket socket = new DatagramSocket()) { //begin try()
-            socket.connect(InetAddress.getByName("8.8.8.8"), 55555);  //changed from 10002 to 55555
-            ip = socket.getLocalAddress().getHostAddress();
-            //add ip to arrayList, add boolean true to arrayList
-            ip_addresses.add(ip);
-            can_be_used.add(true);
-        }//end of try()
-        catch (SocketException ex) {
-            System.out.println("ERROR IN IP PULL HAS OCCURED.");
-        }//end of catch()
-        catch (UnknownHostException ex) {
-            System.out.println("ERROR IN IP PULL HAS OCCURED.");
-        }//end of catch()
-        return ip;
-    } //end of getClientIP()
 
     public static void main(String[] args) throws IOException { //begin main
         SocketTest s1 = new SocketTest();//designed to pull client IP
@@ -64,7 +48,7 @@ public class SocketTest {
                 DatagramSocket socket = null;
                 try {
                     socket = new DatagramSocket();
-                    socket.setBroadcast(true);
+                   // socket.setBroadcast(true);
                 } catch (SocketException ex) {
                     ex.printStackTrace();
                 }//end of catch
