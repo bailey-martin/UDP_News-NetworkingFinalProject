@@ -58,7 +58,7 @@ public class SocketTest {
 
                 DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                 int i = 0;
-                while (i < 10) { //begin of while
+                while (i < 5) { //begin of while
                     try { //begin of try()
                         System.out.println("Sending news item: " + new String(packet.getData()));
                         socket.send(packet);
