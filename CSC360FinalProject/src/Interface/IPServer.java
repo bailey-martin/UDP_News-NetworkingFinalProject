@@ -56,7 +56,11 @@ public class IPServer extends Thread {
                 Logger.getLogger(IPServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        socket.close();
+        try {
+            socket.wait(9999999);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(IPServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public static void main (String [] args) throws SocketException{
         IPServer a = new IPServer();
