@@ -59,7 +59,7 @@ public class SocketTest {
 
                 DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                 DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
-                
+                data = null;
                 int i = 0;
                 while (i < 5) { //begin of while
                     try { //begin of try()
@@ -68,7 +68,6 @@ public class SocketTest {
                         socket.send(packet2);
                         Thread.sleep(50);
                         i++;
-                        data = null;
                         //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
                         SocketTest dummy = new SocketTest();
                         dummy.P2PWork();
