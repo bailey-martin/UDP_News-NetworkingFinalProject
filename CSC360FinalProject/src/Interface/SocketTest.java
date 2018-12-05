@@ -86,27 +86,27 @@ public class SocketTest {
         }).start(); //end of thread
     } //end of startSender()
 
-    public void P2PWork() throws UnknownHostException {
-        ///*random number between 0 and array length of ips 
-        //  if there and can be used is true in boolean array, 
-        //  then call method start peer 2 peer sender with parameter of ip at location of the 
-        //  random number generated. 
-        //  change boolean location to false.
-        //*/
-        Boolean conditional = true;
-        if (ip_addresses.size() > 1) {
-            while (conditional == true) {
-                Random rand = new Random();
-                int position = rand.nextInt(ip_addresses.size());
-                if (can_be_used.get(position).equals(true)) {
-                    conditional = false;
-                    can_be_used.set(position, false);
-                    startP2PSender(ip_addresses.get(position));
-                }//end of if-statement
-            }//end of true loop
-        }//end of if-peventing 1 user
-    }//end of P2PWork Class
-  
+//    public void P2PWork() throws UnknownHostException {
+//        ///*random number between 0 and array length of ips 
+//        //  if there and can be used is true in boolean array, 
+//        //  then call method start peer 2 peer sender with parameter of ip at location of the 
+//        //  random number generated. 
+//        //  change boolean location to false.
+//        //*/
+//        Boolean conditional = true;
+//        if (ip_addresses.size() > 1) {
+//            while (conditional == true) {
+//                Random rand = new Random();
+//                int position = rand.nextInt(ip_addresses.size());
+//                if (can_be_used.get(position).equals(true)) {
+//                    conditional = false;
+//                    can_be_used.set(position, false);
+//                    startP2PSender(ip_addresses.get(position));
+//                }//end of if-statement
+//            }//end of true loop
+//        }//end of if-peventing 1 user
+//    }//end of P2PWork Class
+//  
     public static void startServer() { //beginning of startServer()
         (new Thread() {
             @Override
@@ -139,43 +139,43 @@ public class SocketTest {
             
   //P2P Send
 
-    public void startP2PSender(String ip_addr) throws UnknownHostException {//beginning of startP2PSender()
-        InetAddress aHost = InetAddress.getByName(ip_addr); //gets the IP of a peer from arrayList and attempts to send to them
-        (new Thread() {
-            @Override
-            public void run() {
-                System.out.println("Please enter the news item that you wish to share:\n");
-                Scanner scan = new Scanner(System.in);
-                String str = scan.nextLine();
-                byte data[] = str.getBytes();
-                DatagramSocket socket = null;
-                try {
-                    socket = new DatagramSocket(); //creates a new socket
-                    socket.setBroadcast(true);
-                } catch (SocketException ex) {
-                    ex.printStackTrace();
-                    //parent.quit();
-                }//end of catch
-
-                DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
-                int i = 0;
-                while (i < 10) {
-                    try {
-                        System.out.println("Sending news item: " + new String(packet.getData()));
-                        socket.send(packet);
-                        Thread.sleep(50);
-                        i++;
-                        System.out.println("Sending Attempt Number of News Item: " + i);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        // parent.quit();
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                        //parent.quit();
-                    }//end of catch
-                }//end of while
-            }//end of run()
-        }).start(); //end of thread
-    }//end of startSender()
+//    public void startP2PSender(String ip_addr) throws UnknownHostException {//beginning of startP2PSender()
+//        InetAddress aHost = InetAddress.getByName(ip_addr); //gets the IP of a peer from arrayList and attempts to send to them
+//        (new Thread() {
+//            @Override
+//            public void run() {
+//                System.out.println("Please enter the news item that you wish to share:\n");
+//                Scanner scan = new Scanner(System.in);
+//                String str = scan.nextLine();
+//                byte data[] = str.getBytes();
+//                DatagramSocket socket = null;
+//                try {
+//                    socket = new DatagramSocket(); //creates a new socket
+//                    socket.setBroadcast(true);
+//                } catch (SocketException ex) {
+//                    ex.printStackTrace();
+//                    //parent.quit();
+//                }//end of catch
+//
+//                DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
+//                int i = 0;
+//                while (i < 10) {
+//                    try {
+//                        System.out.println("Sending news item: " + new String(packet.getData()));
+//                        socket.send(packet);
+//                        Thread.sleep(50);
+//                        i++;
+//                        System.out.println("Sending Attempt Number of News Item: " + i);
+//                    } catch (IOException ex) {
+//                        ex.printStackTrace();
+//                        // parent.quit();
+//                    } catch (InterruptedException ex) {
+//                        ex.printStackTrace();
+//                        //parent.quit();
+//                    }//end of catch
+//                }//end of while
+//            }//end of run()
+//        }).start(); //end of thread
+//    }//end of startSender()
   
 }//end of class
