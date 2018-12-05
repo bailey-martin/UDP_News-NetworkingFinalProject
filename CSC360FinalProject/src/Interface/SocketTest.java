@@ -58,8 +58,8 @@ public class SocketTest {
 
                 DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                 DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
-                
-                data = new byte[1024];
+                String tempClear = "";
+                data = tempClear.getBytes();
                 int i = 0;
                 while (i < 5) { //begin of while
                     try { //begin of try()
