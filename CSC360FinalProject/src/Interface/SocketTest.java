@@ -68,8 +68,7 @@ public class SocketTest {
                         socket.send(packet2);
                         Thread.sleep(50);
                         i++;
-                        String tempClear = "";
-                         data = tempClear.getBytes();
+                        data = null;
                         //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
                         SocketTest dummy = new SocketTest();
                         dummy.P2PWork();
