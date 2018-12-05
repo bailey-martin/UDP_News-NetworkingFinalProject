@@ -69,9 +69,9 @@ public class SocketTest {
                         Thread.sleep(50);
                         i++;
                         //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-                        SocketTest dummy = new SocketTest();
-                        dummy.P2PWork();
-                        System.out.println("Sending Attempt Number of News Item: " + i);
+                        //SocketTest dummy = new SocketTest();
+                        //dummy.P2PWork();
+                        //System.out.println("Sending Attempt Number of News Item: " + i);
                     }//end of try
                     catch (IOException ex) {
                         ex.printStackTrace();
