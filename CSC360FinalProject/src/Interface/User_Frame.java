@@ -57,6 +57,7 @@ public class User_Frame extends javax.swing.JFrame {
         newNewsMessageField.setRows(5);
         jScrollPane1.setViewportView(newNewsMessageField);
 
+        newsFeedField.setEditable(false);
         newsFeedField.setColumns(20);
         newsFeedField.setRows(5);
         jScrollPane2.setViewportView(newsFeedField);
