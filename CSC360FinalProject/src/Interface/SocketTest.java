@@ -68,6 +68,7 @@ public class SocketTest {
                         System.out.println("Sending news item: " + new String(packet.getData()));
                         socket.send(packet);
                         socket.send(packet2);
+                        socket.send(packet3);
                         Thread.sleep(50);
                         i++;
                         //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
