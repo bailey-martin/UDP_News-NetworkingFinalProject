@@ -63,7 +63,7 @@ public class SocketTest {
                 data = null;
                 System.out.println ("THIS IS A TEST OF DATA PRINT" + data);
                 int i = 0;
-                while (i < 5) { //begin of while
+                while (i < 3) { //begin of while
                     try { //begin of try()
                         System.out.println("Sending news item: " + new String(packet.getData()));
                         socket.send(packet);
