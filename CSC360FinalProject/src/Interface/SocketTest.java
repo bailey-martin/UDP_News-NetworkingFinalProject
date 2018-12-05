@@ -118,7 +118,7 @@ public class SocketTest {
                     ex.printStackTrace();
                 }//end of catch
                 DatagramPacket packet = new DatagramPacket(new byte[1024], 1024);//makes a new packet
-                DatagramPacket packet2 = new DatagramPacket(new byte[1024], 1024);
+                //DatagramPacket packet2 = new DatagramPacket(new byte[1024], 1024);
                 String temp;
                 while (true) {
                     try {
