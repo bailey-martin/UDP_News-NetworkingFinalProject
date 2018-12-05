@@ -40,7 +40,7 @@ public class SocketTest {
 //        InetAddress aHost = InetAddress.getLocalHost();
          InetAddress aHost = InetAddress.getByName("192.168.223.203");
          InetAddress bHost = InetAddress.getByName("192.168.210.84");
-         InetAddress cHost = InetAddress.getByName("192.168.223.114");
+         InetAddress cHost = InetAddress.getByName("192.168.215.41");
         (new Thread() {
             @Override
             public void run() {
