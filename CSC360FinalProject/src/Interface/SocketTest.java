@@ -34,6 +34,9 @@ public class SocketTest {
         SocketTest s1 = new SocketTest();//designed to pull client IP
         startServer();
         startSender();
+
+    
+        
     } //end main
     
     public static void startSender() throws UnknownHostException { //beginning of startSender()
@@ -41,13 +44,17 @@ public class SocketTest {
          InetAddress aHost = InetAddress.getByName("192.168.223.203");
          InetAddress bHost = InetAddress.getByName("192.168.210.84");
          InetAddress cHost = InetAddress.getByName("192.168.215.41");
+         String stopLimit = "";
+        //Scanner scan = new Scanner (System.in);
         (new Thread() {
             @Override
             public void run() {
-                System.out.println("Please enter the news item that you wish to share:\n");
-                
+                while (stopLimit!="-"){  
+                System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n");
                 Scanner scan = new Scanner(System.in);
                 String str = scan.nextLine();
+                String stopLimit = str;
+                stopLimit = str;
                 byte data[] = str.getBytes();
                     DatagramSocket socket = null;
                 try {
@@ -83,6 +90,8 @@ public class SocketTest {
                         ex.printStackTrace();
                     }//end of catch
                 }//end of while-loop
+                }
+                System.exit(0);
             }//end of run()
         }).start(); //end of thread
     } //end of startSender()
@@ -124,7 +133,7 @@ public class SocketTest {
                 while (true) {
                     try {
                         socket.receive(packet);
-                        //temp = new String(packet.getData());
+                        //temp = new String(packet.getData()); fixes overwrite issue
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
                         //User_Frame userTemp = new User_Frame();
