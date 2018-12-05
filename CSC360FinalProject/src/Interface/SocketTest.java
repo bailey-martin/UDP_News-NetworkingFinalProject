@@ -39,8 +39,8 @@ public class SocketTest {
     public static void startSender() throws UnknownHostException { //beginning of startSender()
 //        InetAddress aHost = InetAddress.getLocalHost();
          InetAddress aHost = InetAddress.getByName("192.168.223.203");
-         //InetAddress aHost = InetAddress.getByName("10.18.40.37");
-         InetAddress bHost = InetAddress.getByName("192.168.223.114");
+         InetAddress bHost = InetAddress.getByName("192.168.210.84.");
+         InetAddress cHost = InetAddress.getByName("192.168.223.114");
         (new Thread() {
             @Override
             public void run() {
@@ -59,6 +59,7 @@ public class SocketTest {
 
                 DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                 DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
+                DatagramPacket packet3 = new DatagramPacket(data, data.length, cHost, 55555);
                 data = null;
                 System.out.println ("THIS IS A TEST OF DATA PRINT" + data);
                 int i = 0;
