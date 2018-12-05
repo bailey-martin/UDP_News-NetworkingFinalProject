@@ -26,8 +26,9 @@ public class SocketTest {
             System.out.println("IP's have been added to the arrayLists.");
             System.out.println("Your IP address is: " + tempIP);
         } catch (SocketException ex) {
-            System.out.println("ERROR IN IP PULL HAS OCCURED.");
+            
         }
+        
     } //end of constructor
 
     public static void main(String[] args) throws IOException { //begin main
