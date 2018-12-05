@@ -124,7 +124,8 @@ public class SocketTest {
                 while (true) {
                     try {
                         socket.receive(packet);
-                        temp = new String(packet.getData());
+                        //temp = new String(packet.getData());
+                        temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
                         //User_Frame userTemp = new User_Frame();
 
