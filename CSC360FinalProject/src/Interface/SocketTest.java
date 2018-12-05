@@ -36,11 +36,6 @@ public class SocketTest {
         startSender();
     } //end main
     
-    public static void printMyData(String s){
-        User_Frame user = new User_Frame();
-        user.newsFeedField.append(s);
-    }//end of printMyData()
-    
     public static void startSender() throws UnknownHostException { //beginning of startSender()
 //        InetAddress aHost = InetAddress.getLocalHost();
          InetAddress aHost = InetAddress.getByName("192.168.223.203");
@@ -132,7 +127,11 @@ public class SocketTest {
                         temp = new String(packet.getData());
                         System.out.println("News Item that was received by the server: " + temp);
                         //User_Frame userTemp = new User_Frame();
+
                         //printMyData (temp);
+
+                       
+
                         //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
                         //SocketTest dummy = new SocketTest();
                         //dummy.P2PWork();

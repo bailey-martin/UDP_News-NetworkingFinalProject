@@ -11,6 +11,8 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import javax.swing.JFrame;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -105,14 +107,24 @@ public class Launching_Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LaunchingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaunchingButtonActionPerformed
-        User_Frame userFrame = new User_Frame();
+        User_Frame userFrame = null;
+        try {
+            userFrame = new User_Frame();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Launching_Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         getClientIP(); //gets the IP address of the client
         userFrame.setMyIP(getClientIP());
         System.out.println (getClientIP()); //debugging purposes
         //Close this window
         setVisible(false);
         //Open USER-FRAME window
-        User_Frame user_window = new User_Frame();
+        User_Frame user_window = null;
+        try {
+            user_window = new User_Frame();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Launching_Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         user_window.setVisible(true);
     }//GEN-LAST:event_LaunchingButtonActionPerformed
 

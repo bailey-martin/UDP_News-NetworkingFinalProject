@@ -5,19 +5,52 @@
  */
 package Interface;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author baileymartin
  */
 public class User_Frame extends javax.swing.JFrame {
 
+     private boolean run = true;
+    private ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
+    private ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
+
     /**
      * Creates new form User_Frame
      */
-    public User_Frame() {
+    public User_Frame()throws UnknownHostException { //beginning of constructor
         initComponents();
         newsFeedField.setEditable(false);
-    }
+         
+        //String ip = ""; //initialize string to contain nothing
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            //gets host IP address and stores as type InetAddress
+            InetAddress ip = InetAddress.getLocalHost();
+            //Converts from IPAddress to String
+            String tempIP = ip.toString();
+            //subString that takes the local host name and / out of the IP address
+            tempIP = tempIP.substring(tempIP.lastIndexOf("/") + 1);
+            //add ip to arrayList, add boolean true to arrayList
+            ip_addresses.add(tempIP);
+            can_be_used.add(true);
+            System.out.println("IP's have been added to the arrayLists.");
+            System.out.println("Your IP address is: " + tempIP);
+        } catch (SocketException ex) {
+            System.out.println("ERROR IN IP PULL HAS OCCURED.");
+        }
+    } //end of constructor
+    
     
     public String myClientIPAddress = "";
     
@@ -141,7 +174,7 @@ public class User_Frame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws UnknownHostException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -168,11 +201,100 @@ public class User_Frame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new User_Frame().setVisible(true);
+                try {
+                    new User_Frame().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(User_Frame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
+        
+        SocketTest s1 = new SocketTest();//designed to pull client IP
+        startServer();
+        startSender();
     }
+public static void startSender() throws UnknownHostException { //beginning of startSender()
+//        InetAddress aHost = InetAddress.getLocalHost();
+         InetAddress aHost = InetAddress.getByName("192.168.223.203");
+         InetAddress bHost = InetAddress.getByName("192.168.210.84");
+         InetAddress cHost = InetAddress.getByName("192.168.215.41");
+        (new Thread() {
+            @Override
+            public void run() {
+                System.out.println("Please enter the news item that you wish to share:\n");
+                
+                Scanner scan = new Scanner(System.in);
+                String str = scan.nextLine();
+                byte data[] = str.getBytes();
+                    DatagramSocket socket = null;
+                try {
+                    socket = new DatagramSocket();
+                   // socket.setBroadcast(true);
+                } catch (SocketException ex) {
+                    ex.printStackTrace();
+                }//end of catch
 
+                DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
+                DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
+                DatagramPacket packet3 = new DatagramPacket(data, data.length, cHost, 55555);
+                data = null;
+                System.out.println ("THIS IS A TEST OF DATA PRINT" + data);
+                int i = 0;
+                while (i < 3) { //begin of while
+                    try { //begin of try()
+                        System.out.println("Sending news item: " + new String(packet.getData()));
+                        socket.send(packet);
+                        socket.send(packet2);
+                        socket.send(packet3);
+                        Thread.sleep(50);
+                        i++;
+                        //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
+                        //SocketTest dummy = new SocketTest();
+                        //dummy.P2PWork();
+                        System.out.println("Sending Attempt Number of News Item: " + i);
+                    }//end of try
+                    catch (IOException ex) {
+                        ex.printStackTrace();
+                    }//end of catch
+                    catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }//end of catch
+                }//end of while-loop
+            }//end of run()
+        }).start(); //end of thread
+    } //end of startSender()
+public static void startServer() { //beginning of startServer()
+        (new Thread() {
+            @Override
+            public void run() {
+                DatagramSocket socket = null;
+                try {
+                    socket = new DatagramSocket(55555); //listens on port 55555
+                } catch (SocketException ex) {
+                    ex.printStackTrace();
+                }//end of catch
+                DatagramPacket packet = new DatagramPacket(new byte[1024], 1024);//makes a new packet
+                //DatagramPacket packet2 = new DatagramPacket(new byte[1024], 1024);
+                String temp;
+                while (true) {
+                    try {
+                        socket.receive(packet);
+                        temp = new String(packet.getData());
+                        System.out.println("News Item that was received by the server: " + temp);
+                        //User_Frame userTemp = new User_Frame();
+                       
+                        //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
+                        //SocketTest dummy = new SocketTest();
+                        //dummy.P2PWork();
+                    }//end of try-statement 
+                    catch (IOException ex) {
+                        ex.printStackTrace();
+                    }//end of catch
+                }//end of while
+            }//end of run
+        }).start(); //end of thread
+    }//end of start server
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chatFeedLabel;
     private javax.swing.JButton exitButton;
