@@ -10,7 +10,7 @@ public class SocketTest {
     private ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
     private ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
 
-    public SocketTest() throws UnknownHostException { //beginning of constructor
+    public SocketTest() throws UnknownHostException, IOException { //beginning of constructor
         try (final DatagramSocket socket = new DatagramSocket()) {
             //gets host IP address and stores as type InetAddress
             InetAddress ip = InetAddress.getLocalHost();
@@ -25,6 +25,11 @@ public class SocketTest {
             System.out.println("Your IP address is: " + tempIP);
             
             //send IP to weberkcudafac
+            InetAddress IP_Server = InetAddress.getByName("192.168.223.203");
+            byte data[] = tempIP.getBytes();
+            DatagramPacket IPpacket = new DatagramPacket(data, data.length, IP_Server, 55555);
+            socket.send(IPpacket);
+            
         } catch (SocketException ex) {
 
         }
