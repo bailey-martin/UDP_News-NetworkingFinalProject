@@ -39,8 +39,8 @@ public class SocketTest {
     public static void startSender() throws UnknownHostException { //beginning of startSender()
 //        InetAddress aHost = InetAddress.getLocalHost();
         InetAddress aHost = InetAddress.getByName("192.168.223.203");
-        InetAddress bHost = InetAddress.getByName("192.168.210.84");
-        InetAddress cHost = InetAddress.getByName("192.168.215.41");
+        InetAddress bHost = InetAddress.getByName("192.168.223.88");
+        InetAddress cHost = InetAddress.getByName("192.168.219.125");
         //String stopLimit = "";
         Scanner scan = new Scanner(System.in);
         (new Thread() {
