@@ -45,7 +45,7 @@ public class SocketTest {
 
     public static void startSender() throws UnknownHostException { //beginning of startSender()
 //        InetAddress aHost = InetAddress.getLocalHost();
-        InetAddress aHost = InetAddress.getByName("192.168.223.203");
+      //  InetAddress aHost = InetAddress.getByName("192.168.223.203");
         InetAddress bHost = InetAddress.getByName("192.168.223.88");
         InetAddress cHost = InetAddress.getByName("192.168.219.125");
         Scanner scan = new Scanner(System.in);
@@ -67,15 +67,15 @@ public class SocketTest {
                         ex.printStackTrace();
                     }//end of catch
 
-                    DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
+                   // DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                     DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
                     DatagramPacket packet3 = new DatagramPacket(data, data.length, cHost, 55555);
                     data = null;
                     int i = 0;
                     while (i < 3) { //begin of while
                         try { //begin of try()
-                            System.out.println("Sending news item: " + new String(packet.getData()));
-                            socket.send(packet);
+                     //       System.out.println("Sending news item: " + new String(packet.getData()));
+                         //   socket.send(packet);
                             socket.send(packet2);
                             socket.send(packet3);
                             Thread.sleep(50);
