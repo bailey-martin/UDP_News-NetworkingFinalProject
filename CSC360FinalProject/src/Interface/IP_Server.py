@@ -9,4 +9,5 @@ while True:
     print("Incoming message " + message.decode())
     modifiedMessage = message.decode().upper()
     ip_addresses.append(modifiedMessage)
+    print(modifiedMessage)
     serverSocket.sendto(modifiedMessage.encode(), clientAddress)
