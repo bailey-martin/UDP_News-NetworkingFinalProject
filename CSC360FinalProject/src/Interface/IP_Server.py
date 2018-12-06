@@ -10,13 +10,13 @@ def printTheIPs():
    global messages
    for x in range(len(ip_addresses)):
         messages += ip_addresses[x];
-		
+
 while True:
     message, clientAddress = serverSocket.recvfrom(2048)
     print("Incoming message " + message.decode())
-	if message.find("IP") == 1:
-		ip_addresses.append(clientAddress[0])
-		printTheIPs()
-		for i in range(0, len(ip_addresses)):
-			serverSocket.sendto(bytes(messages, 'utf-8'), (ip_addresses[i], 55555))
+    if 'IP' in message:
+	       ip_addresses.append(clientAddress[0])
+	       printTheIPs()
+	       for i in range(0, len(ip_addresses)):
+		             serverSocket.sendto(bytes(messages, 'utf-8'), (ip_addresses[i], 55555))
     #serverSocket.sendto(modifiedMessage.encode(), clientAddress)
