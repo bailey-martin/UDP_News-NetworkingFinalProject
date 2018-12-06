@@ -83,6 +83,7 @@ public class SocketTest {
                         }
                         //end of catch
                     }//end of while-loop
+                    System.exit(0);
                 }
             }//end of run()
         }).start(); //end of thread
