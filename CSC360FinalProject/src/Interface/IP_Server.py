@@ -10,4 +10,4 @@ while True:
     modifiedMessage = message.decode().upper()
     ip_addresses.append(modifiedMessage)
     print(modifiedMessage)
-    serverSocket.sendto(modifiedMessage.encode(), clientAddress)
+    #serverSocket.sendto(modifiedMessage.encode(), clientAddress)
