@@ -52,6 +52,9 @@ public class SocketTest {
                     System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n");
                     //Scanner scan = new Scanner(System.in);
                     String str = scan.nextLine();
+                    if(str.equals("-"))
+                        System.exit(0);
+                        //break;
                     //String stopLimit = str;
                     stopLimit = str;
                     System.out.println ("THE STOP LIMIT IS::::::::::: " + stopLimit);
@@ -83,7 +86,8 @@ public class SocketTest {
                         }
                         //end of catch
                     }//end of while-loop
-                    System.exit(0);
+                   // if (stopLimit.equals("-"))
+                        //System.exit(0);//WRONG SPOT
                 }
             }//end of run()
         }).start(); //end of thread
