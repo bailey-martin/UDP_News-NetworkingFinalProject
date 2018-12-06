@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class SocketTest {
 
-    private ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
+    private static ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
     private ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
 
     public SocketTest() throws UnknownHostException, IOException { //beginning of constructor
@@ -19,10 +19,11 @@ public class SocketTest {
             //subString that takes the local host name and / out of the IP address
             tempIP = tempIP.substring(tempIP.lastIndexOf("/") + 1);
             //add ip to arrayList, add boolean true to arrayList
-            ip_addresses.add(tempIP);
-            can_be_used.add(true);
-            System.out.println("IP's have been added to the arrayLists.");
-            System.out.println("Your IP address is: " + tempIP);
+            
+//            ip_addresses.add(tempIP);
+//            can_be_used.add(true);
+//            System.out.println("IP's have been added to the arrayLists.");
+//            System.out.println("Your IP address is: " + tempIP);
             
             //send IP to weberkcudafac
             InetAddress IP_Server = InetAddress.getByName("weberkcudafac"); //IPServer
@@ -35,18 +36,18 @@ public class SocketTest {
         }
 
     } //end of constructor
-    public boolean isIPHere(String ip){
-        for (int i = 0; i < ip_addresses.size(); i++){
-            if (ip_addresses.indexOf(ip)==-1){
-                return false;
-            }//end of if-statement
-        }//end of for-loop
-        return true;
-    }
-    
-    public void addIP(String s){
-        ip_addresses.add(s);
-    }
+//    public boolean isIPHere(String ip){
+//        for (int i = 0; i < ip_addresses.size(); i++){
+//            if (ip_addresses.indexOf(ip)==-1){
+//                return false;
+//            }//end of if-statement
+//        }//end of for-loop
+//        return true;
+//    }
+//    
+//    public void addIP(String s){
+//        ip_addresses.add(s);
+//    }
     
     public static void main(String[] args) throws IOException { //begin main
         SocketTest s1 = new SocketTest();//designed to pull client IP
@@ -55,12 +56,11 @@ public class SocketTest {
     } //end main
 
     public static void startSender() throws UnknownHostException { //beginning of startSender()
-//        InetAddress aHost = InetAddress.getLocalHost();
-      //  InetAddress aHost = InetAddress.getByName("192.168.223.203");
-        InetAddress bHost = InetAddress.getByName("192.168.223.88");
-        InetAddress cHost = InetAddress.getByName("192.168.219.125");
-        Scanner scan = new Scanner(System.in);
-        (new Thread() {
+//        InetAddress aHost = InetAddress.getLocalHost()
+        for (int i = 0; i < ip_addresses.size(); i++){
+            InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
+            Scanner scan = new Scanner(System.in);
+            (new Thread() {
             @Override
             public void run() {  
                 String stopLimit = "";
@@ -78,17 +78,13 @@ public class SocketTest {
                         ex.printStackTrace();
                     }//end of catch
 
-                   // DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
-                    DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
-                    DatagramPacket packet3 = new DatagramPacket(data, data.length, cHost, 55555);
+                    DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                     data = null;
                     int i = 0;
                     while (i < 1) { //begin of while
                         try { //begin of try()
-                     //       System.out.println("Sending news item: " + new String(packet.getData()));
-                         //   socket.send(packet);
-                            socket.send(packet2);
-                            socket.send(packet3);
+                            System.out.println("Sending news item: " + new String(packet.getData()));
+                            socket.send(packet);
                             Thread.sleep(50);
                             i++;
                             System.out.println("Sending Attempt Number of News Item: " + i);
@@ -101,6 +97,10 @@ public class SocketTest {
                 }
             }//end of run()
         }).start(); //end of thread
+        }
+        
+
+ 
     } //end of startSender()
 
     public static void startServer() { //beginning of startServer()
@@ -121,12 +121,25 @@ public class SocketTest {
                         //temp = new String(packet.getData()); fixes overwrite issue
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
-                        SocketTest myTest = new SocketTest();
+                        
+                        
+                        for (int i = 0; i < ip_addresses.size(); i++){
+                            System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(i));
+                        }
+                        
+                        
+                  
                         if (temp.contains("1")){
-                            if (myTest.isIPHere(temp)==false){
-                                myTest.addIP(temp);
-                                break;
-                            }//end of add to arrayList
+//                            if (myTest.isIPHere(temp)==false){
+//                                myTest.addIP(temp);
+//                                break;
+//                            }//end of add to arrayList
+                            for (int i = 0; i < ip_addresses.size(); i++){
+                                if (ip_addresses.indexOf(temp)==-1){
+                                    ip_addresses.add(temp);
+                                    break;
+                                }//end of if-statement
+                            }//end of for-loop
                         }//end of valid IP test
                     }//end of try-statement 
                     catch (IOException ex) {
