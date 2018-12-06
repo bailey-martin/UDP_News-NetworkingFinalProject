@@ -35,7 +35,19 @@ public class SocketTest {
         }
 
     } //end of constructor
-
+    public boolean isIPHere(String ip){
+        for (int i = 0; i < ip_addresses.size(); i++){
+            if (ip_addresses.indexOf(ip)==-1){
+                return false;
+            }//end of if-statement
+        }//end of for-loop
+        return true;
+    }
+    
+    public void addIP(String s){
+        ip_addresses.add(s);
+    }
+    
     public static void main(String[] args) throws IOException { //begin main
         SocketTest s1 = new SocketTest();//designed to pull client IP
         startServer();
@@ -71,7 +83,7 @@ public class SocketTest {
                     DatagramPacket packet3 = new DatagramPacket(data, data.length, cHost, 55555);
                     data = null;
                     int i = 0;
-                    while (i < 3) { //begin of while
+                    while (i < 1) { //begin of while
                         try { //begin of try()
                      //       System.out.println("Sending news item: " + new String(packet.getData()));
                          //   socket.send(packet);
@@ -109,6 +121,13 @@ public class SocketTest {
                         //temp = new String(packet.getData()); fixes overwrite issue
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
+                        SocketTest myTest = new SocketTest();
+                        if (temp.contains("1")){
+                            if (myTest.isIPHere(temp)==false){
+                                myTest.addIP(temp);
+                                break;
+                            }//end of add to arrayList
+                        }//end of valid IP test
                     }//end of try-statement 
                     catch (IOException ex) {
                         ex.printStackTrace();
