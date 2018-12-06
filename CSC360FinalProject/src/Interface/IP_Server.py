@@ -14,8 +14,9 @@ def printTheIPs():
 while True:
     message, clientAddress = serverSocket.recvfrom(2048)
     print("Incoming message " + message.decode())
-    ip_addresses.append(clientAddress[0])
-    printTheIPs()
-    for i in range(0, len(ip_addresses)):
-        serverSocket.sendto(bytes(messages, 'utf-8'), (ip_addresses[i], 55555))
+	if message.find("IP") == 1:
+		ip_addresses.append(clientAddress[0])
+		printTheIPs()
+		for i in range(0, len(ip_addresses)):
+			serverSocket.sendto(bytes(messages, 'utf-8'), (ip_addresses[i], 55555))
     #serverSocket.sendto(modifiedMessage.encode(), clientAddress)
