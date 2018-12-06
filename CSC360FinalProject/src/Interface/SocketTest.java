@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class SocketTest {
 
-    //private boolean run = true;
     private ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
     private ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
 
@@ -41,23 +40,17 @@ public class SocketTest {
         InetAddress aHost = InetAddress.getByName("192.168.223.203");
         InetAddress bHost = InetAddress.getByName("192.168.223.88");
         InetAddress cHost = InetAddress.getByName("192.168.219.125");
-        //String stopLimit = "";
         Scanner scan = new Scanner(System.in);
         (new Thread() {
             @Override
-            public void run() {
-                //while (stopLimit!="-"){  
+            public void run() {  
                 String stopLimit = "";
                 while (!("-".equals(stopLimit))) {
                     System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n");
-                    //Scanner scan = new Scanner(System.in);
                     String str = scan.nextLine();
                     if(str.equals("-"))
                         System.exit(0);
-                        //break;
-                    //String stopLimit = str;
                     stopLimit = str;
-                    System.out.println ("THE STOP LIMIT IS::::::::::: " + stopLimit);
                     byte data[] = str.getBytes();
                     DatagramSocket socket = null;
                     try {
@@ -86,8 +79,6 @@ public class SocketTest {
                         }
                         //end of catch
                     }//end of while-loop
-                   // if (stopLimit.equals("-"))
-                        //System.exit(0);//WRONG SPOT
                 }
             }//end of run()
         }).start(); //end of thread
