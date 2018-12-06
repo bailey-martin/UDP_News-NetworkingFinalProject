@@ -8,5 +8,5 @@ while True:
     message, clientAddress = serverSocket.recvfrom(2048)
     print("Incoming message " + message.decode())
     modifiedMessage = message.decode().upper()
-    list.append(modifiedMessage)
+    ip_addresses.append(modifiedMessage)
     serverSocket.sendto(modifiedMessage.encode(), clientAddress)
