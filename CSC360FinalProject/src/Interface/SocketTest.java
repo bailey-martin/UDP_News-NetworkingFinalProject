@@ -3,16 +3,14 @@ package Interface;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class SocketTest {
-    private boolean run = true;
+    //private boolean run = true;
     private ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
     private ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
 
     public SocketTest() throws UnknownHostException { //beginning of constructor
-        //String ip = ""; //initialize string to contain nothing
         try (final DatagramSocket socket = new DatagramSocket()) {
             //gets host IP address and stores as type InetAddress
             InetAddress ip = InetAddress.getLocalHost();
@@ -35,9 +33,6 @@ public class SocketTest {
         SocketTest s1 = new SocketTest();//designed to pull client IP
         startServer();
         startSender();
-
-    
-        
     } //end main
     
     public static void startSender() throws UnknownHostException { //beginning of startSender()
@@ -50,7 +45,8 @@ public class SocketTest {
         (new Thread() {
             @Override
             public void run() {
-                while (stopLimit!="-"){  
+                //while (stopLimit!="-"){  
+                while(!"-".equals(stopLimit)){
                 System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n");
                 Scanner scan = new Scanner(System.in);
                 String str = scan.nextLine();
@@ -60,16 +56,15 @@ public class SocketTest {
                     DatagramSocket socket = null;
                 try {
                     socket = new DatagramSocket();
-                   // socket.setBroadcast(true);
                 } catch (SocketException ex) {
                     ex.printStackTrace();
                 }//end of catch
-
+                
                 DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                 DatagramPacket packet2 = new DatagramPacket(data, data.length, bHost, 55555);
                 DatagramPacket packet3 = new DatagramPacket(data, data.length, cHost, 55555);
                 data = null;
-                System.out.println ("THIS IS A TEST OF DATA PRINT" + data);
+                //System.out.println ("THIS IS A TEST OF DATA PRINT" + data);
                 int i = 0;
                 while (i < 3) { //begin of while
                     try { //begin of try()
@@ -79,20 +74,16 @@ public class SocketTest {
                         socket.send(packet3);
                         Thread.sleep(50);
                         i++;
-                        //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
-                        //SocketTest dummy = new SocketTest();
+                         //SocketTest dummy = new SocketTest();
                         //dummy.P2PWork();
                         System.out.println("Sending Attempt Number of News Item: " + i);
                     }//end of try
-                    catch (IOException ex) {
+                    catch (IOException | InterruptedException ex) {
                         ex.printStackTrace();
-                    }//end of catch
-                    catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }//end of catch
+                    }
+                    //end of catch
                 }//end of while-loop
                 }
-                System.exit(0);
             }//end of run()
         }).start(); //end of thread
     } //end of startSender()
@@ -137,13 +128,7 @@ public class SocketTest {
                         //temp = new String(packet.getData()); fixes overwrite issue
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
-                        //User_Frame userTemp = new User_Frame();
-
                         //printMyData (temp);
-
-                       
-
-                        //Now we need to send to other peers who have not yet gotten this message yet. So..let's pull from the arrayList!
                         //SocketTest dummy = new SocketTest();
                         //dummy.P2PWork();
                     }//end of try-statement 
@@ -154,9 +139,7 @@ public class SocketTest {
             }//end of run
         }).start(); //end of thread
     }//end of start server
-            
-  //P2P Send
-
+    
 //    public void startP2PSender(String ip_addr) throws UnknownHostException {//beginning of startP2PSender()
 //        InetAddress aHost = InetAddress.getByName(ip_addr); //gets the IP of a peer from arrayList and attempts to send to them
 //        (new Thread() {
@@ -196,4 +179,6 @@ public class SocketTest {
 //        }).start(); //end of thread
 //    }//end of startSender()
   
+    
+    
 }//end of class
