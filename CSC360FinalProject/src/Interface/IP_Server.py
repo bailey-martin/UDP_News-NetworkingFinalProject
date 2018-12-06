@@ -14,7 +14,7 @@ def printTheIPs():
 while True:
     message, clientAddress = serverSocket.recvfrom(2048)
     print("Incoming message " + message.decode())
-    if 'IP' in message:
+    if '1' in message:
 	       ip_addresses.append(clientAddress[0])
 	       printTheIPs()
 	       for i in range(0, len(ip_addresses)):

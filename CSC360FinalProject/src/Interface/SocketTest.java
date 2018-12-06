@@ -25,7 +25,7 @@ public class SocketTest {
             System.out.println("Your IP address is: " + tempIP);
             
             //send IP to weberkcudafac
-            tempIP = "IP" + tempIP;
+            //tempIP = "IP" + tempIP;
             InetAddress IP_Server = InetAddress.getByName("192.168.223.203"); //IPServer
             byte data[] = tempIP.getBytes();
             DatagramPacket IPpacket = new DatagramPacket(data, data.length, IP_Server, 55555);
