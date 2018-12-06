@@ -48,7 +48,7 @@ public class SocketTest {
             public void run() {
                 //while (stopLimit!="-"){  
                 String stopLimit = "";
-                while (!"-".equals(stopLimit)) {
+                while (!("-".equals(stopLimit))) {
                     System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n");
                     //Scanner scan = new Scanner(System.in);
                     String str = scan.nextLine();
