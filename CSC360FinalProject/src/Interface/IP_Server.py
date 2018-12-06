@@ -12,7 +12,7 @@ while True:
     ip_addresses.append(modifiedMessage)
     print(modifiedMessage)
     printTheIPs()
-    for i in range (lenip_addresses)):
+    for i in range (len(ip_addresses)):
         serverSocket.sendTo(bytes(messages, 'utf-8'), (ip_addresses[i], 55555))
     #serverSocket.sendto(modifiedMessage.encode(), clientAddress)
 
