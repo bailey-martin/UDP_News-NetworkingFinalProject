@@ -54,6 +54,7 @@ public class SocketTest {
                     String str = scan.nextLine();
                     //String stopLimit = str;
                     stopLimit = str;
+                    System.out.println ("THE STOP LIMIT IS::::::::::: " + stopLimit);
                     byte data[] = str.getBytes();
                     DatagramSocket socket = null;
                     try {
