@@ -19,12 +19,12 @@ public class SocketTest {
             //subString that takes the local host name and / out of the IP address
             tempIP = tempIP.substring(tempIP.lastIndexOf("/") + 1);
             //add ip to arrayList, add boolean true to arrayList
-            
+
             ip_addresses.add(tempIP); //adds to arrayList
             can_be_used.add(true); //adds to secondary arrayList
             System.out.println("IP's have been added to the arrayLists.");  //alerts user they have been added
             System.out.println("Your IP address is: " + tempIP);    //displays peer's IP address
-            
+
             //send IP to weberkcudafac
             InetAddress IP_Server = InetAddress.getByName("weberkcudafac"); //IPServer
             byte data[] = tempIP.getBytes();
@@ -50,17 +50,17 @@ public class SocketTest {
             System.out.println ("IP: " + ip_addresses.get(r));
         }
         for (int i = 0; i < ip_addresses.size(); i++){
-            System.out.println ("HERE IS WHOM I WANT TO SEND TO: " + ip_addresses.get(i));
+            //InetAddress aHost = InetAddress.getByName("10.18.40.55");
             InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
             System.out.println ("HOST ADDRESS AMANDA TEST: " + aHost.getHostAddress());
             //InetAddress aHost = InetAddress.getByName("10.18.40.48");
             System.out.println ("HERE IS THE IP TO WHICH I AM TRYING TO SEND TO AT BEG OF START SENDER: " + ip_addresses.get(i));
             System.out.println ("SIZE OF ARRAY LIST: " + ip_addresses.size());
             Scanner scan = new Scanner(System.in);
-            
+
             (new Thread() {
             @Override
-            public void run() {  
+            public void run() {
                                             System.out.println("THE THREAD HAS STARTED PEOPLE");
 
                 String stopLimit = "";
@@ -83,7 +83,7 @@ public class SocketTest {
                     data = null;
                     int q = 0;
                     while (q < 1) { //begin of while
-                        
+
                         try { //begin of try()
                             System.out.println ("HERE IS WHOM I WANT TO SEND TO IN WHILE: " + aHost.toString());
                             System.out.println("Sending news item: " + new String(packet.getData()));
@@ -119,13 +119,13 @@ public class SocketTest {
                 }//end of catch()
                 DatagramPacket packet = new DatagramPacket(new byte[1024], 1024);//makes a new packet
                 String temp;
-                while (true) { 
+                while (true) {
                     try {
                         socket.receive(packet);
                         //temp = new String(packet.getData()); fixes overwrite issue
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
-                        
+
                         //break it up
                         String [] splitIPs = temp.split("/");
                         for (int e = 0; e < splitIPs.length; e++){
@@ -137,7 +137,7 @@ public class SocketTest {
                                     if (ip_addresses.indexOf(s)==-1){
                                         ip_addresses.add(s);
                                         System.out.println ("ADDING THE IP: " + s + " into the arrayList");
-                                        
+
                                         break;
                                     }//end of if-statement
                                     System.out.println ("End of if after IP add");
@@ -147,15 +147,15 @@ public class SocketTest {
                             System.out.println ("End of if after IP add valid ip contains a 1");
                         }//end of for-each loop
                         System.out.println ("End of for each loop");
-                        
+
                         for (int q = 0; q < ip_addresses.size(); q++){
                             System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(q));
                             System.out.println ("Size == " + ip_addresses.size());
                         }//end of for-loop
-                        
-                        
-                 
-                    }//end of try-statement 
+
+
+
+                    }//end of try-statement
                     catch (IOException ex) {
                         System.out.println ("NAK");
                     }//end of catch
@@ -165,6 +165,5 @@ public class SocketTest {
         System.out.println ("THE END OF THE RECVR THREAD");
     }//end of start server
 
-    
-    
+
 }//end of class
