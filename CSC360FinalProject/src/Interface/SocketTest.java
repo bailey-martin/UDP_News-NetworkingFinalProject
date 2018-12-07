@@ -30,10 +30,10 @@ public class SocketTest {
             byte data[] = tempIP.getBytes();
             DatagramPacket IPpacket = new DatagramPacket(data, data.length, IP_Server, 55555);
             socket.send(IPpacket);
-            
-        } catch (SocketException ex) {
-
-        }
+        }//end of try()
+        catch (SocketException ex) {
+                System.out.println("NAK-Error has occured.");
+        }//end of catch()
 
     } //end of constructor
 //    public boolean isIPHere(String ip){
@@ -97,10 +97,7 @@ public class SocketTest {
                 }
             }//end of run()
         }).start(); //end of thread
-        }
-        
-
- 
+        }//end of for-loop
     } //end of startSender()
 
     public static void startServer() { //beginning of startServer()
@@ -110,9 +107,10 @@ public class SocketTest {
                 DatagramSocket socket = null;
                 try {
                     socket = new DatagramSocket(55555); //listens on port 55555
-                } catch (SocketException ex) {
+                }//end of try()
+                catch (SocketException ex) {
                     ex.printStackTrace();
-                }//end of catch
+                }//end of catch()
                 DatagramPacket packet = new DatagramPacket(new byte[1024], 1024);//makes a new packet
                 String temp;
                 while (true) {
@@ -125,7 +123,7 @@ public class SocketTest {
                         
                         for (int i = 0; i < ip_addresses.size(); i++){
                             System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(i));
-                        }
+                        }//end of for-loop
                         
                         
                   
@@ -143,7 +141,7 @@ public class SocketTest {
                         }//end of valid IP test
                     }//end of try-statement 
                     catch (IOException ex) {
-                        ex.printStackTrace();
+                        System.out.println ("NAK");
                     }//end of catch
                 }//end of while
             }//end of run
