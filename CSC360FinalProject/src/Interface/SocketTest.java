@@ -23,7 +23,7 @@ public class SocketTest {
 //            ip_addresses.add(tempIP);
 //            can_be_used.add(true);
 //            System.out.println("IP's have been added to the arrayLists.");
-//            System.out.println("Your IP address is: " + tempIP);
+            System.out.println("Your IP address is: " + tempIP);
             
             //send IP to weberkcudafac
             InetAddress IP_Server = InetAddress.getByName("weberkcudafac"); //IPServer
