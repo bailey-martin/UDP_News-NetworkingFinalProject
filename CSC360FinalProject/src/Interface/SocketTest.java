@@ -113,15 +113,15 @@ public class SocketTest {
                             if (s.contains("1")){
                                 for (int i = 0; i < ip_addresses.size(); i++){
                                     if (ip_addresses.indexOf(s)==-1){
-                                    ip_addresses.add(s);
-                                    //break;
+                                        ip_addresses.add(s);
+                                        //break;
                                     }//end of if-statement
                                 }//end of for-loop
                             }//end of if-statement to see if the message contains a valid IP number
                         }//end of for-each loop
                         
-                        for (int i = 0; i < ip_addresses.size(); i++){
-                            System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(i));
+                        for (int q = 0; q < ip_addresses.size(); q++){
+                            System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(q));
                         }//end of for-loop
                         
                         
