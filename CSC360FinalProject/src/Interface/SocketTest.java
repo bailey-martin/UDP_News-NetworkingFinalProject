@@ -36,19 +36,7 @@ public class SocketTest {
         }//end of catch()
 
     } //end of constructor
-//    public boolean isIPHere(String ip){
-//        for (int i = 0; i < ip_addresses.size(); i++){
-//            if (ip_addresses.indexOf(ip)==-1){
-//                return false;
-//            }//end of if-statement
-//        }//end of for-loop
-//        return true;
-//    }
-//    
-//    public void addIP(String s){
-//        ip_addresses.add(s);
-//    }
-    
+
     public static void main(String[] args) throws IOException { //begin main
         SocketTest s1 = new SocketTest();//designed to pull client IP
         startServer();
@@ -137,20 +125,7 @@ public class SocketTest {
                         }//end of for-loop
                         
                         
-                  
-//                        if (temp.contains("1")){
-////                            if (myTest.isIPHere(temp)==false){
-////                                myTest.addIP(temp);
-////                                break;
-////                            }//end of add to arrayList
-//                            for (int i = 0; i < ip_addresses.size(); i++){
-//                                if (ip_addresses.indexOf(temp)==-1){
-//                                    ip_addresses.add(temp);
-//                                    break;
-//                                }//end of if-statement
-                          //  }//end of for-loop
-                        
-                        //}//end of valid IP test
+                 
                     }//end of try-statement 
                     catch (IOException ex) {
                         System.out.println ("NAK");
