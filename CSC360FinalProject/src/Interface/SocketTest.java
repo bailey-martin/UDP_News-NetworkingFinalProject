@@ -20,10 +20,10 @@ public class SocketTest {
             tempIP = tempIP.substring(tempIP.lastIndexOf("/") + 1);
             //add ip to arrayList, add boolean true to arrayList
             
-            ip_addresses.add(tempIP);
-            can_be_used.add(true);
-            System.out.println("IP's have been added to the arrayLists.");
-            System.out.println("Your IP address is: " + tempIP);
+            ip_addresses.add(tempIP); //adds to arrayList
+            can_be_used.add(true); //adds to secondary arrayList
+            System.out.println("IP's have been added to the arrayLists.");  //alerts user they have been added
+            System.out.println("Your IP address is: " + tempIP);    //displays peer's IP address
             
             //send IP to weberkcudafac
             InetAddress IP_Server = InetAddress.getByName("weberkcudafac"); //IPServer
