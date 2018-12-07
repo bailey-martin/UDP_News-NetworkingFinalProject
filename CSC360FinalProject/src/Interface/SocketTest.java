@@ -20,8 +20,8 @@ public class SocketTest {
             tempIP = tempIP.substring(tempIP.lastIndexOf("/") + 1);
             //add ip to arrayList, add boolean true to arrayList
 
-            //ip_addresses.add(tempIP); //adds to arrayList
-            //can_be_used.add(true); //adds to secondary arrayList
+            ip_addresses.add(tempIP); //adds to arrayList
+            can_be_used.add(true); //adds to secondary arrayList
             System.out.println("IP's have been added to the arrayLists.");  //alerts user they have been added
             System.out.println("Your IP address is: " + tempIP);    //displays peer's IP address
 
@@ -45,10 +45,6 @@ public class SocketTest {
 
     public static void startSender() throws UnknownHostException { //beginning of startSender()
         //InetAddress aHost;
-        System.out.println ("Let's see what is stored in the Arraylist:");
-        for (int r = 0; r < ip_addresses.size(); r++){
-            System.out.println ("IP: " + ip_addresses.get(r));
-        }
         for (int i = 0; i < ip_addresses.size(); i++){
             //InetAddress aHost = InetAddress.getByName("10.18.40.55");
             InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
