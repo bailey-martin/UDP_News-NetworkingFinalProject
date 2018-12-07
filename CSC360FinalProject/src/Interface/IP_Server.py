@@ -9,7 +9,7 @@ messages = ""
 def printTheIPs():
    global messages
    for x in range(len(ip_addresses)):
-        messages += ip_addresses[x];
+        messages += ip_addresses[x] + "/";
 
 while True:
     message, clientAddress = serverSocket.recvfrom(2048)
