@@ -91,10 +91,9 @@ public class SocketTest {
                         }//end of try
                         catch (IOException | InterruptedException ex) {
                             ex.printStackTrace();
-                        }
-                        //end of catch
+                        }//end of catch()
                     }//end of while-loop
-                }
+                }//end of while-loop
             }//end of run()
         }).start(); //end of thread
         }//end of for-loop
