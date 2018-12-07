@@ -120,6 +120,17 @@ public class SocketTest {
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
                         
+                        //break it up
+                        String [] splitIPs = temp.split("/");
+                        for (String s:splitIPs){
+                            if (s.contains("1")){
+                                for (int i = 0; i < ip_addresses.size(); i++){
+                                if (ip_addresses.indexOf(s)==-1){
+                                    ip_addresses.add(s);
+                                    break;
+                            }
+                        }
+                        
                         
                         for (int i = 0; i < ip_addresses.size(); i++){
                             System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(i));
@@ -127,16 +138,16 @@ public class SocketTest {
                         
                         
                   
-                        if (temp.contains("1")){
-//                            if (myTest.isIPHere(temp)==false){
-//                                myTest.addIP(temp);
-//                                break;
-//                            }//end of add to arrayList
-                            for (int i = 0; i < ip_addresses.size(); i++){
-                                if (ip_addresses.indexOf(temp)==-1){
-                                    ip_addresses.add(temp);
-                                    break;
-                                }//end of if-statement
+//                        if (temp.contains("1")){
+////                            if (myTest.isIPHere(temp)==false){
+////                                myTest.addIP(temp);
+////                                break;
+////                            }//end of add to arrayList
+//                            for (int i = 0; i < ip_addresses.size(); i++){
+//                                if (ip_addresses.indexOf(temp)==-1){
+//                                    ip_addresses.add(temp);
+//                                    break;
+//                                }//end of if-statement
                             }//end of for-loop
                         }//end of valid IP test
                     }//end of try-statement 
