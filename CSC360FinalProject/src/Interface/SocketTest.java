@@ -68,8 +68,10 @@ public class SocketTest {
                     System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n");
                     String str = scan.nextLine();
                     outerloop:
-                    if(str.equals("-"))
+                    if(str.equals("-")){
+                        stopLimit = "-";
                         break outerloop;
+                    }
                     stopLimit = str;
                     byte data[] = str.getBytes();
                     DatagramSocket socket = null;
