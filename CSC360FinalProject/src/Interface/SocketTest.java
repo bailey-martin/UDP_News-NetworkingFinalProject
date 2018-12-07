@@ -125,12 +125,13 @@ public class SocketTest {
                         for (String s:splitIPs){
                             if (s.contains("1")){
                                 for (int i = 0; i < ip_addresses.size(); i++){
-                                if (ip_addresses.indexOf(s)==-1){
+                                    if (ip_addresses.indexOf(s)==-1){
                                     ip_addresses.add(s);
-                                    break;
-                            }
-                        }
-                        
+                                    //break;
+                                    }//end of if-statement
+                                }//end of for-loop
+                            }//end of if-statement to see if the message contains a valid IP number
+                        }//end of for-each loop
                         
                         for (int i = 0; i < ip_addresses.size(); i++){
                             System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(i));
@@ -148,8 +149,9 @@ public class SocketTest {
 //                                    ip_addresses.add(temp);
 //                                    break;
 //                                }//end of if-statement
-                            }//end of for-loop
-                        }//end of valid IP test
+                          //  }//end of for-loop
+                        
+                        //}//end of valid IP test
                     }//end of try-statement 
                     catch (IOException ex) {
                         System.out.println ("NAK");
