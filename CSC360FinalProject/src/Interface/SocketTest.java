@@ -46,6 +46,7 @@ public class SocketTest {
     public static void startSender() throws UnknownHostException { //beginning of startSender()
         //InetAddress aHost;
         for (int i = 0; i < ip_addresses.size(); i++){
+            //InetAddress aHost = InetAddress.getByName("10.18.40.55");            
             InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
             Scanner scan = new Scanner(System.in);
             (new Thread() {
@@ -135,6 +136,5 @@ public class SocketTest {
         }).start(); //end of thread
     }//end of start server
 
-    
-    
+       
 }//end of class
