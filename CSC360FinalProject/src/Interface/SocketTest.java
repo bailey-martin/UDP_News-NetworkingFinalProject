@@ -80,14 +80,14 @@ public class SocketTest {
 
                     DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                     data = null;
-                    int i = 0;
-                    while (i < 1) { //begin of while
+                    int q = 0;
+                    while (q < 1) { //begin of while
                         try { //begin of try()
                             System.out.println("Sending news item: " + new String(packet.getData()));
                             socket.send(packet);
                             Thread.sleep(50);
-                            i++;
-                            System.out.println("Sending Attempt Number of News Item: " + i);
+                            q++;
+                            System.out.println("Sending Attempt Number of News Item: " + q);
                         }//end of try
                         catch (IOException | InterruptedException ex) {
                             ex.printStackTrace();
