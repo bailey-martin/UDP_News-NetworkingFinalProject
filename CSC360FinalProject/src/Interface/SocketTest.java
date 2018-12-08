@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SocketTest {
 
@@ -45,11 +47,15 @@ public class SocketTest {
 
     public static void startSender() throws UnknownHostException { //beginning of startSender()
         //InetAddress aHost;
-        for (int i = 0; i < ip_addresses.size(); i++){
-            //InetAddress aHost = InetAddress.getByName("10.18.40.55");
-            InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
-            //InetAddress aHost = InetAddress.getByName("10.18.40.48");
-            Scanner scan = new Scanner(System.in);
+        //InetAddress aHost = InetAddress.getByName("10.18.40.55");
+        //InetAddress aHost = InetAddress.getByName("10.18.40.48");
+//        for (int i = 0; i < ip_addresses.size(); i++){
+//            System.out.println("WE ARE USING: " + ip_addresses.get(i));
+//            InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
+//            sendOps(aHost);
+        //}//end of for-loop
+                                
+        Scanner scan = new Scanner(System.in);
             (new Thread() {
             @Override
             public void run() {
@@ -60,12 +66,12 @@ public class SocketTest {
                     outerloop:
                     if(str.equals("-")){
                         stopLimit = "-";
+                        System.exit(0);
                         break outerloop;
                     }
                     else{
                        stopLimit = str; 
                     }
-                    
                     byte data[] = str.getBytes();
                     DatagramSocket socket = null;
                     try {
@@ -73,7 +79,13 @@ public class SocketTest {
                     } catch (SocketException ex) {
                         ex.printStackTrace();
                     }//end of catch
-
+                    for (int z = 0; z < ip_addresses.size(); z++){
+                        InetAddress aHost = null;
+                        try {
+                            aHost = InetAddress.getByName(ip_addresses.get(z));
+                        } catch (UnknownHostException ex) {
+                            Logger.getLogger(SocketTest.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                     data = null;
                     int q = 0;
@@ -91,10 +103,10 @@ public class SocketTest {
                     }//end of while-loop
                 }//end of while-loop
             }//end of run()
+            }//I just added
         }).start(); //end of thread
-        }//end of for-loop
     } //end of startSender()
-
+    
     public static void startServer() { //beginning of startServer()
         (new Thread() {
             @Override
