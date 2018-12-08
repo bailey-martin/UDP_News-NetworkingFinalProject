@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SocketTest_Old {
 
@@ -47,26 +45,25 @@ public class SocketTest_Old {
     } //end main
 
     public static void startSender() throws UnknownHostException { //beginning of startSender()
-        InetAddress aHost = InetAddress.getByName("192.168.209.240");
+        InetAddress aHost = InetAddress.getByName("192.168.209.240"); //First peer IP
         //InetAddress bHost = InetAddress.getByName("10.18.40.48");
-        InetAddress bHost = InetAddress.getByName("172.20.1.177");
-        InetAddress cHost = InetAddress.getByName("10.18.40.55");                           
+        InetAddress bHost = InetAddress.getByName("172.20.1.177"); //Second peer IP
+        InetAddress cHost = InetAddress.getByName("10.18.40.55"); //Third peer IP
         Scanner scan = new Scanner(System.in);
             (new Thread() {
             @Override
             public void run() {
                 String stopLimit = "";
                 while (!("-".equals(stopLimit))) {
-                    System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n");
+                    System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n"); //tells the user the program is ready to transmit and tells them how to terminate the program
                     String str = scan.nextLine();
                     outerloop:
-                    if(str.equals("-")){
-                        stopLimit = "-";
-                        System.exit(0);
-                        break outerloop;
+                    if(str.equals("-")){ //if the String equals '-', then the stop limit is set to that symbol
+                        System.exit(0); //exit the system
+                        break outerloop; //breaks the loop
                     }
                     else{
-                       stopLimit = str; 
+                       stopLimit = str; //Sets the stop limit to a string
                     }
                     byte data[] = str.getBytes();
                     DatagramSocket socket = null;
@@ -75,17 +72,16 @@ public class SocketTest_Old {
                     } catch (SocketException ex) {
                         ex.printStackTrace();
                     }//end of catch
-                        DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
-                        DatagramPacket packet1 = new DatagramPacket(data, data.length, bHost, 55555);
-                        DatagramPacket packet2 = new DatagramPacket(data, data.length, cHost, 55555);
-                        data = null;     
+                        DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555); //creates packet for host A
+                        DatagramPacket packet1 = new DatagramPacket(data, data.length, bHost, 55555); //creates packet for host B
+                        DatagramPacket packet2 = new DatagramPacket(data, data.length, cHost, 55555); //creates packet for host C
                         int q = 0;
                         while (q < 1) { //begin of while
                             try { //begin of try()
                                 System.out.println("Sending news item: " + new String(packet.getData()));
-                                socket.send(packet);
-                                socket.send(packet1);
-                                socket.send(packet2);
+                                socket.send(packet); //sends first packet from the first peer
+                                socket.send(packet1); //sends second packet from the second peer
+                                socket.send(packet2); //sends the third packet from the third peer
                                 Thread.sleep(50);
                                 q++;
                                 System.out.println("Sending Attempt Number of News Item: " + q);
@@ -114,13 +110,13 @@ public class SocketTest_Old {
                 String temp;
                 while (true) {
                     try {
-                        socket.receive(packet);
+                        socket.receive(packet); //the packet is received
                         //temp = new String(packet.getData()); fixes overwrite issue
-                        temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
-                        System.out.println("News Item that was received by the server: " + temp);
+                        temp = new String(packet.getData(), packet.getOffset(), packet.getLength()); //detects the length of a packet and makes that data the only data on that line
+                        System.out.println("News Item that was received by the server: " + temp); //prints out what the server has received
                     }//end of try-statement
                     catch (IOException ex) {
-                        System.out.println ("NAK");
+                        System.out.println ("NAK"); //creates a NAK when a message is not received but is registered to have been sent
                     }//end of catch
                 }//end of while
             }//end of run
