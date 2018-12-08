@@ -85,7 +85,7 @@ public class SocketTest {
                         ex.printStackTrace();
                     }//end of catch
                     try {
-                            aHost = InetAddress.getByName(ip_addresses.get((1)));
+                            aHost = InetAddress.getByName(ip_addresses.get((0)));
                     } catch (UnknownHostException ex) {
                         Logger.getLogger(SocketTest.class.getName()).log(Level.SEVERE, null, ex);
                     }
