@@ -1,5 +1,6 @@
 CSC 360 Networking Project--a P2P UDP-Based News Application
 University of Mount Union
+Dr.Weber
 Team Members: Bailey Martin, Matt McMinn, Amanda Hegidus
 Date Published: December 7, 2018
 Project Description: https://silver.mountunion.edu/cs/csc/CSC360/Fall2018/index.htm#project
