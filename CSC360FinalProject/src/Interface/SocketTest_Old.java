@@ -75,7 +75,7 @@ public class SocketTest_Old {
                         while (q < 1) { //begin of while
                             try { //begin of try()
                                 System.out.println("Sending news item: " + new String(packet.getData()));
-                                //socket.send(packet);
+                                socket.send(packet);
                                 socket.send(packet1);
                                 socket.send(packet2);
                                 Thread.sleep(50);
