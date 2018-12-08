@@ -26,12 +26,6 @@ public class SocketTest_Old {
             can_be_used.add(true); //adds to secondary arrayList
             System.out.println("IP's have been added to the arrayLists.");  //alerts user they have been added
             System.out.println("Your IP address is: " + tempIP);    //displays peer's IP address
-
-            //send IP to weberkcudafac
-            InetAddress IP_Server = InetAddress.getByName("weberkcudafac"); //IPServer
-            byte data[] = tempIP.getBytes();
-            DatagramPacket IPpacket = new DatagramPacket(data, data.length, IP_Server, 55555);
-            socket.send(IPpacket);
         }//end of try()
         catch (SocketException ex) {
                 System.out.println("NAK-Error has occured.");
@@ -46,14 +40,9 @@ public class SocketTest_Old {
     } //end main
 
     public static void startSender() throws UnknownHostException { //beginning of startSender()
-        //InetAddress aHost;
         InetAddress aHost = InetAddress.getByName("10.18.40.55");
         InetAddress bHost = InetAddress.getByName("10.18.40.48");
-        InetAddress cHost = InetAddress.getByName("192.168.223.203");
-//        for (int i = 0; i < ip_addresses.size(); i++){
-//            System.out.println("WE ARE USING: " + ip_addresses.get(i));
-//            InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
-                                
+        InetAddress cHost = InetAddress.getByName("192.168.223.203");                           
         Scanner scan = new Scanner(System.in);
             (new Thread() {
             @Override
@@ -78,7 +67,6 @@ public class SocketTest_Old {
                     } catch (SocketException ex) {
                         ex.printStackTrace();
                     }//end of catch
-                    
                         DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                         DatagramPacket packet1 = new DatagramPacket(data, data.length, bHost, 55555);
                         DatagramPacket packet2 = new DatagramPacket(data, data.length, cHost, 55555);
@@ -122,28 +110,6 @@ public class SocketTest_Old {
                         //temp = new String(packet.getData()); fixes overwrite issue
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
-
-//                        //Break the list of IPs up into individual IP string addresses that can be added to the arrayList ip_addresses
-//                        String [] splitIPs = temp.split("/");
-//                        for (String s:splitIPs){
-//                            if (s.contains("1")){
-//                                for (int i = 0; i < ip_addresses.size(); i++){
-//                                    if (ip_addresses.indexOf(s)==-1){
-//                                        ip_addresses.add(s);
-//                                        boolean myBoolean = new Boolean (true);
-//                                        can_be_used.add(myBoolean);
-//                                        System.out.println ("ADDING THE IP: " + s + " into the arrayList");
-//                                        break;
-//                                    }//end of if-statement
-//                                }//end of for-loop
-//                            }//end of if-statement to see if the message contains a valid IP number
-//                        }//end of for-each loop
-//
-//                        for (int q = 0; q < ip_addresses.size(); q++){
-//                            System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(q));
-//                            System.out.println ("Size == " + ip_addresses.size());
-//                        }//end of for-loop
-
                     }//end of try-statement
                     catch (IOException ex) {
                         System.out.println ("NAK");
@@ -152,6 +118,4 @@ public class SocketTest_Old {
             }//end of run
         }).start(); //end of thread
     }//end of start server
-
-
 }//end of class
