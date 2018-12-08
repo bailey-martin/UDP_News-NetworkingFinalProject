@@ -80,32 +80,36 @@ public class SocketTest {
                     } catch (SocketException ex) {
                         ex.printStackTrace();
                     }//end of catch
-                    for (int z = 0; z < ip_addresses.size(); z++){
-                        try {
-                            aHost = InetAddress.getByName(ip_addresses.get(z));
-                        } catch (UnknownHostException ex) {
-                            System.out.println ("NAK--Error Occured");
-                        }
 
-                    DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
-                    data = null;
-                    int q = 0;
-                    while (q < 1) { //begin of while
-                        try { //begin of try()
-                            System.out.println("Sending news item: " + new String(packet.getData()));
-                            socket.send(packet);
-                            Thread.sleep(50);
-                            q++;
-                            System.out.println("Sending Attempt Number of News Item: " + q);
-                        }//end of try
-                        catch (IOException | InterruptedException ex) {
-                            System.out.println ("NAK-sending end");
-                        }//end of catch()
-                    }//end of while-loop
+                        for (int y = 0; y < ip_addresses.size(); y++){
+                            try {
+                                aHost = InetAddress.getByName(ip_addresses.get(y));
+                            } catch (UnknownHostException ex) {
+                                Logger.getLogger(SocketTest.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
+                                data = null;
+                                int q = 0;
+                                while (q < 1) { //begin of while
+                                    try { //begin of try()
+                                        System.out.println("Sending news item: " + new String(packet.getData()));
+                                        socket.send(packet);
+                                        Thread.sleep(50);
+                                        q++;
+                                        System.out.println("Sending Attempt Number of News Item: " + q);
+                                    }//end of try
+                                    catch (IOException | InterruptedException ex) {
+                                        System.out.println ("NAK-sending end");
+                                    }//end of catch()
+                                }//end of while-loop
+                        }//end of big for-loop
+                    
                 }//end of while-loop
             }//end of run()
-            }//I just added
+       
+                    
         }).start(); //end of thread
+
     } //end of startSender()
     
     public static void startServer() { //beginning of startServer()
