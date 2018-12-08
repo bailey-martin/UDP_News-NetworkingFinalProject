@@ -34,7 +34,7 @@ public class SocketTest_Old {
     } //end of constructor
 
     public static void main(String[] args) throws IOException { //begin main
-        SocketTest s1 = new SocketTest();//designed to pull client IP
+        SocketTest_Old s1 = new SocketTest_Old();//designed to pull client IP
         startServer();
         startSender();
     } //end main
@@ -42,7 +42,7 @@ public class SocketTest_Old {
     public static void startSender() throws UnknownHostException { //beginning of startSender()
         InetAddress aHost = InetAddress.getByName("192.168.209.240");
         InetAddress bHost = InetAddress.getByName("10.18.40.48");
-        InetAddress cHost = InetAddress.getByName("192.168.223.203");                           
+        InetAddress cHost = InetAddress.getByName("10.18.40.55");                           
         Scanner scan = new Scanner(System.in);
             (new Thread() {
             @Override
@@ -75,7 +75,7 @@ public class SocketTest_Old {
                         while (q < 1) { //begin of while
                             try { //begin of try()
                                 System.out.println("Sending news item: " + new String(packet.getData()));
-                                socket.send(packet);
+                                //socket.send(packet);
                                 socket.send(packet1);
                                 socket.send(packet2);
                                 Thread.sleep(50);
