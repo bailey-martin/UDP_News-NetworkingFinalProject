@@ -31,7 +31,7 @@ public class SocketTest {
             //send IP to weberkcudafac
             InetAddress IP_Server = InetAddress.getByName("weberkcudafac"); //IPServer
             byte data[] = tempIP.getBytes();
-            DatagramPacket IPpacket = new DatagramPacket(data, data.length, IP_Server, 55555);
+            DatagramPacket IPpacket = new DatagramPacket(data, data.length, IP_Server, 55555); //creates a new Datagram and prepares it to be sent over port 55555
             socket.send(IPpacket);
         }//end of try()
         catch (SocketException ex) {
@@ -48,8 +48,8 @@ public class SocketTest {
 
     public static void startSender() throws UnknownHostException { //beginning of startSender()
         //InetAddress aHost;
-        //InetAddress aHost = InetAddress.getByName("10.18.40.55");
-        //InetAddress aHost = InetAddress.getByName("10.18.40.48");
+        //InetAddress aHost = InetAddress.getByName("10.18.40.55"); //First host IP
+        //InetAddress aHost = InetAddress.getByName("10.18.40.48"); //Second host IP
 //        for (int i = 0; i < ip_addresses.size(); i++){
 //            System.out.println("WE ARE USING: " + ip_addresses.get(i));
 //            InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
@@ -58,18 +58,17 @@ public class SocketTest {
             (new Thread() {
             @Override
             public void run() {
-                String stopLimit = "";
+                String stopLimit = ""; //Creates a stop limit "value"
                 while (!("-".equals(stopLimit))) {
-                    System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n");
-                    String str = scan.nextLine();
+                    System.out.println("Please enter the news item that you wish to share, Enter '-' to escape input feed:\n"); //Displays message in Output window to prompt user to enter news item
+                    String str = scan.nextLine(); //scans next line for a string value
                     outerloop:
-                    if(str.equals("-")){
-                        stopLimit = "-";
-                        System.exit(0);
-                        break outerloop;
+                    if(str.equals("-")){  //if the String equals '-', then the stop limit is set to that symbol
+                        System.exit(0); //exit the system
+                        break outerloop; //breaks the loop
                     }
                     else{
-                       stopLimit = str; 
+                       stopLimit = str; //Sets the stop limit to a string
                     }
                     byte data[] = str.getBytes();
                     DatagramSocket socket = null;
@@ -84,15 +83,14 @@ public class SocketTest {
                         Logger.getLogger(SocketTest.class.getName()).log(Level.SEVERE, null, ex);
                     }
                         DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
-                        data = null;     
                         int q = 0;
                         while (q < 1) { //begin of while
                             try { //begin of try()
                                 System.out.println("Sending news item: " + new String(packet.getData()));
-                                socket.send(packet);
+                                socket.send(packet); //sends the news item
                                 Thread.sleep(50);
                                 q++;
-                                System.out.println("Sending Attempt Number of News Item: " + q);
+                                System.out.println("Sending Attempt Number of News Item: " + q); //registers how many attempts have been made to send a packet
                             }//end of try
                             catch (IOException | InterruptedException ex) {
                                 System.out.println ("NAK-sending end");
@@ -118,35 +116,35 @@ public class SocketTest {
                 String temp;
                 while (true) {
                     try {
-                        socket.receive(packet);
+                        socket.receive(packet); //the socket has received the packet
                         //temp = new String(packet.getData()); fixes overwrite issue
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
-                        System.out.println("News Item that was received by the server: " + temp);
+                        System.out.println("News Item that was received by the server: " + temp); //prints out what the server has received
 
                         //Break the list of IPs up into individual IP string addresses that can be added to the arrayList ip_addresses
-                        String [] splitIPs = temp.split("/");
+                        String [] splitIPs = temp.split("/"); //Sets the split symbol to '/'
                         for (String s:splitIPs){
-                            if (s.contains("1")){
+                            if (s.contains("1")){ //if the IP split contains '1', enter the for loop and be split in the correct location
                                 for (int i = 0; i < ip_addresses.size(); i++){
                                     if (ip_addresses.indexOf(s)==-1){
                                         ip_addresses.add(s);
                                         boolean myBoolean = new Boolean (true);
                                         can_be_used.add(myBoolean);
-                                        System.out.println ("ADDING THE IP: " + s + " into the arrayList");
-                                        break;
+                                        System.out.println ("ADDING THE IP: " + s + " into the arrayList"); //tells the user the IP is being added to the ArrayList
+                                        break; //break the split process
                                     }//end of if-statement
                                 }//end of for-loop
                             }//end of if-statement to see if the message contains a valid IP number
                         }//end of for-each loop
 
                         for (int q = 0; q < ip_addresses.size(); q++){
-                            System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(q));
-                            System.out.println ("Size == " + ip_addresses.size());
+                            System.out.println ("ARRAYLIST IPS  " + ip_addresses.get(q)); //displays all the IPs in the ArrayList
+                            System.out.println ("Size == " + ip_addresses.size()); //prints out the IP addresses in the ArrayList in order
                         }//end of for-loop
 
                     }//end of try-statement
                     catch (IOException ex) {
-                        System.out.println ("NAK");
+                        System.out.println ("NAK"); //creates a NAK when a message is not received but is registered to have been sent
                     }//end of catch
                 }//end of while
             }//end of run
