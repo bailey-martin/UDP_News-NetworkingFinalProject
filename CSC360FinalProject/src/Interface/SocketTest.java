@@ -28,11 +28,11 @@ public class SocketTest {
             System.out.println("IP's have been added to the arrayLists.");  //alerts user they have been added
             System.out.println("Your IP address is: " + tempIP);    //displays peer's IP address
 
-//            //send IP to weberkcudafac
-//            InetAddress IP_Server = InetAddress.getByName("weberkcudafac"); //IPServer
-//            byte data[] = tempIP.getBytes();
-//            DatagramPacket IPpacket = new DatagramPacket(data, data.length, IP_Server, 55555);
-//            socket.send(IPpacket);
+            //send IP to weberkcudafac
+            InetAddress IP_Server = InetAddress.getByName("weberkcudafac"); //IPServer
+            byte data[] = tempIP.getBytes();
+            DatagramPacket IPpacket = new DatagramPacket(data, data.length, IP_Server, 55555);
+            socket.send(IPpacket);
         }//end of try()
         catch (SocketException ex) {
                 System.out.println("NAK-Error has occured.");
