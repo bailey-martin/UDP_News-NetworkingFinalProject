@@ -11,6 +11,7 @@ public class SocketTest {
 
     private static ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
     private ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
+    private static InetAddress aHost;
 
     public SocketTest() throws UnknownHostException, IOException { //beginning of constructor
         try (final DatagramSocket socket = new DatagramSocket()) {
@@ -80,12 +81,12 @@ public class SocketTest {
                         ex.printStackTrace();
                     }//end of catch
                     for (int z = 0; z < ip_addresses.size(); z++){
-                        InetAddress aHost = null;
                         try {
                             aHost = InetAddress.getByName(ip_addresses.get(z));
                         } catch (UnknownHostException ex) {
-                            Logger.getLogger(SocketTest.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println ("NAK--Error Occured");
                         }
+
                     DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
                     data = null;
                     int q = 0;
