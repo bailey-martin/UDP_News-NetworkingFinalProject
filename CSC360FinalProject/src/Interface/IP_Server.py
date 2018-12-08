@@ -1,3 +1,10 @@
+#CSC 360 Networking Project--a P2P UDP-Based News Application     IP_Server.py
+#University of Mount Union
+#Dr.Weber
+#Team Members: Bailey Martin, Matt McMinn, Amanda Hegidus
+#Date Published: December 7, 2018
+#Project Description: https://silver.mountunion.edu/cs/csc/CSC360/Fall2018/index.htm#project
+#GitHub Project Link: https://github.com/bailey-martin/UDP_News-NetworkingFinalProject
 from socket import *
 serverPort = 55555
 serverSocket = socket(AF_INET, SOCK_DGRAM)
