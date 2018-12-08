@@ -40,7 +40,7 @@ public class SocketTest_Old {
     } //end main
 
     public static void startSender() throws UnknownHostException { //beginning of startSender()
-        InetAddress aHost = InetAddress.getByName("10.18.40.55");
+        InetAddress aHost = InetAddress.getByName("192.168.209.240");
         InetAddress bHost = InetAddress.getByName("10.18.40.48");
         InetAddress cHost = InetAddress.getByName("192.168.223.203");                           
         Scanner scan = new Scanner(System.in);
