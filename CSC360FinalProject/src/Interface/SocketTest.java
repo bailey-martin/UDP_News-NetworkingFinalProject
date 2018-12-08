@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class SocketTest {
 
     private static ArrayList<String> ip_addresses = new ArrayList(); //stores IP addresses of peers
-    private ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
+    private static ArrayList<Boolean> can_be_used = new ArrayList(); //true if matching location IP can be sent to; false if already sent to
     private static InetAddress aHost;
 
     public SocketTest() throws UnknownHostException, IOException { //beginning of constructor
@@ -53,8 +53,6 @@ public class SocketTest {
 //        for (int i = 0; i < ip_addresses.size(); i++){
 //            System.out.println("WE ARE USING: " + ip_addresses.get(i));
 //            InetAddress aHost = InetAddress.getByName(ip_addresses.get(i));
-//            sendOps(aHost);
-        //}//end of for-loop
                                 
         Scanner scan = new Scanner(System.in);
             (new Thread() {
@@ -80,36 +78,29 @@ public class SocketTest {
                     } catch (SocketException ex) {
                         ex.printStackTrace();
                     }//end of catch
-
-                        for (int y = 0; y < ip_addresses.size(); y++){
-                            try {
-                                aHost = InetAddress.getByName(ip_addresses.get(y));
-                            } catch (UnknownHostException ex) {
-                                Logger.getLogger(SocketTest.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
-                                data = null;
-                                int q = 0;
-                                while (q < 1) { //begin of while
-                                    try { //begin of try()
-                                        System.out.println("Sending news item: " + new String(packet.getData()));
-                                        socket.send(packet);
-                                        Thread.sleep(50);
-                                        q++;
-                                        System.out.println("Sending Attempt Number of News Item: " + q);
-                                    }//end of try
-                                    catch (IOException | InterruptedException ex) {
-                                        System.out.println ("NAK-sending end");
-                                    }//end of catch()
-                                }//end of while-loop
-                        }//end of big for-loop
-                    
-                }//end of while-loop
-            }//end of run()
-       
-                    
+                    try {
+                            aHost = InetAddress.getByName(ip_addresses.get((1)));
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(SocketTest.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        DatagramPacket packet = new DatagramPacket(data, data.length, aHost, 55555);
+                        data = null;     
+                        int q = 0;
+                        while (q < 1) { //begin of while
+                            try { //begin of try()
+                                System.out.println("Sending news item: " + new String(packet.getData()));
+                                socket.send(packet);
+                                Thread.sleep(50);
+                                q++;
+                                System.out.println("Sending Attempt Number of News Item: " + q);
+                            }//end of try
+                            catch (IOException | InterruptedException ex) {
+                                System.out.println ("NAK-sending end");
+                            }//end of catch()
+                        }//end of while-loop
+                }//end of big for-loop
+    }//end of run()      
         }).start(); //end of thread
-
     } //end of startSender()
     
     public static void startServer() { //beginning of startServer()
@@ -132,13 +123,15 @@ public class SocketTest {
                         temp = new String(packet.getData(), packet.getOffset(), packet.getLength());
                         System.out.println("News Item that was received by the server: " + temp);
 
-                        //break it up
+                        //Break the list of IPs up into individual IP string addresses that can be added to the arrayList ip_addresses
                         String [] splitIPs = temp.split("/");
                         for (String s:splitIPs){
                             if (s.contains("1")){
                                 for (int i = 0; i < ip_addresses.size(); i++){
                                     if (ip_addresses.indexOf(s)==-1){
                                         ip_addresses.add(s);
+                                        boolean myBoolean = new Boolean (true);
+                                        can_be_used.add(myBoolean);
                                         System.out.println ("ADDING THE IP: " + s + " into the arrayList");
                                         break;
                                     }//end of if-statement
