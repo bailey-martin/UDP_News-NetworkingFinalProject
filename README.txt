@@ -34,3 +34,8 @@ Directions for Using the Program:
 		2. In the SocketTest_Old class in lines 43-46, (InetAddress aHost = InetAddress.getByName("192.168.209.240”);, modify the IP address to be all of the peers that 		you want in the P2P network.
 		3. Run SocketTest_Old on each of the peers. You will be promoted with your IP address in the console and have the ability to input a news item (or a “-“) to 			terminate the program. After typing your message and pressing “Enter”, the message will be shared with all peers and displayed in their Java Consoles. Each peer 		can continue to enter news items by just typing in the Java console and pressing “Enter” again, until terminating with a “-“.
 	-for SocketTest.java:
+		1. Open CSC360 Final Project in Netbeans
+		2. Log into weberkcudafac, and use the smbclient to move/copy the IP_Server.py file from the CSC 360 Final Project (Netbeans) onto weberkcudafac.
+		3. Execute IP_Server.py on weberkcudafac. NOTE:: YOU MUST EXECUTE THIS SCRIPT USING PYTHON3!!!!! Ex: ~python3 IP_Server.py
+		4. After you see “The server is ready to receive” in weberkcudafac’s SSH window, you are good to go.
+		5. Run/Execute the SocketTest.java file in NetBeans on each peer that you want to be a part of this P2P network. You should notice that the peer of each IP that 		is printed in the Java Console will appear in the SSH window of weberkcudafac as well, showing that our IP server has received and stored the IP address of the 		new peer.
